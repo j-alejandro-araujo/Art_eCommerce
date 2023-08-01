@@ -9,7 +9,11 @@
   ],
   "customizations": {
     "vscode": {
-      "extensions": ["thebearingedge.lfz-code", "esbenp.prettier-vscode"]
+      "extensions": [
+        "thebearingedge.lfz-code",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ]
     }
   },
   "postCreateCommand": "[ ! -f package-lock.json ] || npm ci; sudo chown -R dev:dev ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/* && chmod 644 ~/.ssh/*.pub",
