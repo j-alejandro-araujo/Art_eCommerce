@@ -26,6 +26,25 @@ app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello, World!' });
 });
 
+app.get('api/product/', async (req, res, next) => {
+  try {
+    const sql = `
+    select "productId",
+           "name",
+           "price",
+           "description",
+           "image",
+    from "product"
+    order by "name"
+    `;
+
+    const result = await db.query(sql);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
 /**
  * Serves React's index.html if no api route matches.
  *

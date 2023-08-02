@@ -22,9 +22,10 @@ CREATE TABLE "public"."Category" (
 CREATE TABLE "public"."Product" (
 	"productId" serial NOT NULL,
 	"name" TEXT NOT NULL,
-	"description" TEXT NOT NULL,
 	"price" numeric NOT NULL,
+	"description" TEXT NOT NULL,
 	"image" TEXT NOT NULL,
+	"type" TEXT NOT NULL,
 	"createdAt" TIMESTAMP DEFAULT NOW(),
 	"updatedAt" TIMESTAMP DEFAULT NOW(),
 	"categoryId" integer NOT NULL,
