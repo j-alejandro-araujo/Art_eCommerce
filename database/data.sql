@@ -1,11 +1,5 @@
--- Use SQL insert statements to add any
--- starting/dummy data to your database tables
-
--- EXAMPLE:
-
---  insert into "todos"
---    ("task", "isCompleted")
---    values
---      ('Learn to code', false),
---      ('Build projects', false),
---      ('Get a job', false);
+insert into "products"
+  ("name", "price", "description", "image", "type")
+  values
+    ('POSCA PC-5M Medium Tip Earth Tones Paint Marker Set', '29.99', 'Nontoxic, water-based POSCA paint markers can be used on almost any surface and are loved by professionals, creative hobbyists and amateurs alike. The alcohol and solvent-free opaque paint covers well, is blendable and can be overlaid when dry. ACMI certified and made in Japan, set colors include grey, ivory, ochre, emerald green, khaki green, English green, navy blue and brown.', 'https://imgs.michaels.com/MAM/assets/1/5E3C12034D34434F8A9BAAFDDF0F8E1B/img/91DC86A4D21E4F5F89E8332272AEBA95/10712830_1.jpg?fit=inside|1280:1280', 'markers'),
+    ('Super Value 50 Piece Brush Set by Artist Loft', '11.99', 'Stock up with a full range of paintbrushes with this super value pack. Great for student and classroom use, this value pack includes paintbrushes in an assortment of shapes, sizes and filament types, as well as palette knives for more textural work.', 'https://imgs.michaels.com/MAM/assets/1/5E3C12034D34434F8A9BAAFDDF0F8E1B/img/2DF21881824C448A8B581F0C4C102BE9/10504534_21.jpg?fit=inside|1280:1280', 'brushes')

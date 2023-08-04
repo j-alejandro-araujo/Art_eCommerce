@@ -1,30 +1,34 @@
-import { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Catalog from './pages/Catalog';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
-  const [serverData, setServerData] = useState('');
+  // const [serverData, setServerData] = useState('');
 
-  useEffect(() => {
-    async function readServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
+  // useEffect(() => {
+  //   async function readServerData() {
+  //     const resp = await fetch('/api/hello');
+  //     const data = await resp.json();
 
-      console.log('Data from server:', data);
+  //     console.log('Data from server:', data);
 
-      setServerData(data.message);
-    }
+  //     setServerData(data.message);
+  //   }
 
-    readServerData();
-  }, []);
+  //   readServerData();
+  // }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="text-5xl font-bold underline">{serverData}</h1>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navbar />}>
+        <Route index element={<Home />} />
+        <Route path="products" element={<Catalog />} />
+        <Route path="details/:productId" element={<ProductDetails />} />
+      </Route>
+    </Routes>
   );
 }
 

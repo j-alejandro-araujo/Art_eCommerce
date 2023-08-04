@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
+import ClientError from './lib/client-error.js';
 import pg from 'pg';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
@@ -24,6 +25,41 @@ app.use(express.json());
 
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello, World!' });
+});
+
+app.get('/api/products/', async (req, res, next) => {
+  try {
+    const sql = `
+    select *
+    from "products"
+    `;
+
+    const result = await db.query(sql);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+app.get('/api/products/:productId', async (req, res, next) => {
+  try {
+    const productId = Number(req.params.productId);
+    if (!productId) {
+      throw new ClientError(400, 'productId must be a positive integer.');
+    }
+    const sql = `
+    select *
+    from "products"
+    where "productId" = $1
+    `;
+
+    const params = [productId];
+    const result = await db.query(sql, params);
+    res.json(result.rows[0]);
+  } catch (err) {
+    next(err);
+  }
 });
 
 /**
