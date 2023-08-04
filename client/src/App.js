@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Catalog from './components/Catalog';
+import Catalog from './pages/Catalog';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   // const [serverData, setServerData] = useState('');
@@ -24,7 +25,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Navbar />}>
         <Route index element={<Home />} />
-        <Route path="product" element={<Catalog />} />
+        <Route path="products" element={<Catalog />} />
+        <Route path="details/:productId" element={<ProductDetails />} />
       </Route>
     </Routes>
   );

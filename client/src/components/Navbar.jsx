@@ -1,18 +1,17 @@
-import react from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
   faSearch,
   faCartShopping,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleAllClick = () => {
-    navigate('/product');
-  };
+  // const handleAllClick = () => {
+  //   navigate('/product');
   return (
     <>
       <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
@@ -44,10 +43,10 @@ const Navbar = () => {
       <div>
         <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
           {/* Bottom Side */}
-          <button onClick={handleAllClick}>
-            <p>ALL</p>
+          <Link to="products">
+            ALL
             <FontAwesomeIcon icon={faBars} />
-          </button>
+          </Link>
           <p>PAINT</p>
           <p>CANVAS</p>
           <p>BRUSHES</p>
@@ -55,6 +54,7 @@ const Navbar = () => {
           <p>SCULPTING</p>
           <p>PENCILS</p>
         </div>
+        <Outlet />
       </div>
     </>
   );
