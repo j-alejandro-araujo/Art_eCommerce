@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
-import { fetchProduct } from '../lib/api';
+import { useEffect, useState, useContext } from 'react';
+import { fetchProduct, addToCart } from '../lib/api';
 import { useParams, Link } from 'react-router-dom';
+import CartContext from '../components/CartContext';
 
 const ProductDetails = () => {
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState();
+  const { cart, setCart, userCartId } = useContext(CartContext);
 
   useEffect(() => {
     async function loadProduct(productId) {
@@ -34,6 +36,19 @@ const ProductDetails = () => {
 
   const { name, image, price, description } = product;
 
+  async function handleAddToCart() {
+    try {
+      const quantity = 1;
+      const cartId = userCartId;
+      const addedProduct = await addToCart(productId, quantity, cartId);
+      const updatedCart = [...cart];
+      updatedCart.push(addedProduct);
+      setCart(updatedCart);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="container mx-auto my-8">
       <Link to="/products" className="text-blue-600 hover:underline">
@@ -51,6 +66,9 @@ const ProductDetails = () => {
           <h2 className="text-3xl font-bold mb-4">{name}</h2>
           <p className="text-lg">{description}</p>
           <p className="mt-2 text-lg font-bold">Price: ${price}</p>
+          <button className="btn btn-primary" onClick={handleAddToCart}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

@@ -62,6 +62,59 @@ app.get('/api/products/:productId', async (req, res, next) => {
   }
 });
 
+app.post('/api/cart/addtocart', async (req, res, next) => {
+  try {
+    const { productId, qty, cartId } = req.body;
+    const sql = `
+    insert into "cartItems" ("productId", "qty", "cartId")
+    values ($1, $2, $3)
+    returning *
+    `;
+
+    const params = [productId, qty, cartId];
+    const result = await db.query(sql, params);
+    const [cart] = result.rows;
+    res.status(201).json(cart);
+  } catch (err) {
+    console.error(err); // logging error to troubleshoot
+    next(err);
+  }
+});
+
+app.post('/api/cart/removeitem', async (req, res, next) => {
+  try {
+    const { productId, cartId } = req.body;
+    const sql = `
+      delete
+        from "cartItems"
+       where "productId" = $1
+         and "cartId" = $2
+    `;
+    const params = [productId, cartId];
+    await db.query(sql, params);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/cart/update', async (req, res, next) => {
+  try {
+    const { productId, cartId, qty } = req.body;
+    const sql = `
+      update "cartItems"
+         set "qty" = $3
+       where "productId" = $1
+         and "cartId" = $2
+    `;
+    const params = [productId, cartId, qty];
+    await db.query(sql, params);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
 /**
  * Serves React's index.html if no api route matches.
  *

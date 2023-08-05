@@ -13,3 +13,16 @@ export async function fetchProduct(productId) {
     throw new Error(`Error fetching selected product ${response.status}`);
   return await response.json();
 }
+
+// Add to cart
+export async function addToCart(productId, qty, cartId) {
+  const req = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ productId, qty, cartId }),
+  };
+  const response = await fetch('/api/cart/addtocart', req);
+  return await response.json();
+}

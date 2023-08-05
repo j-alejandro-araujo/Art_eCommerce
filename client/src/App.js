@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import ProductDetails from './pages/ProductDetails';
+import Cart from './pages/Cart';
+// import GlobalContext from './components/GlobalContext';
+import CartContext from './components/CartContext';
 
 function App() {
   // const [serverData, setServerData] = useState('');
@@ -20,15 +23,19 @@ function App() {
 
   //   readServerData();
   // }, []);
+  const [cart, setCart] = useState([]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Navbar />}>
-        <Route index element={<Home />} />
-        <Route path="products" element={<Catalog />} />
-        <Route path="details/:productId" element={<ProductDetails />} />
-      </Route>
-    </Routes>
+    <CartContext.Provider value={{ cart, setCart }}>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<Home />} />
+          <Route path="products" element={<Catalog />} />
+          <Route path="details/:productId" element={<ProductDetails />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
+      </Routes>
+    </CartContext.Provider>
   );
 }
 

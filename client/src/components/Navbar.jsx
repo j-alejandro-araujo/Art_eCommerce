@@ -18,7 +18,7 @@ const Navbar = () => {
         {/* Top Side */}
         <Link to="/">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2">
-            ART<span className="font-bold">DEPOT</span>
+            ART<span className="font-bold">STORE</span>
           </h1>
         </Link>
         {/* Search Input */}
@@ -34,9 +34,9 @@ const Navbar = () => {
           <p>Sign in</p>
           <p>|</p>
           {/* Shopping Cart */}
-          <button>
+          <Link to="cart">
             <FontAwesomeIcon icon={faCartShopping} />
-          </button>
+          </Link>
         </div>
       </div>
 
