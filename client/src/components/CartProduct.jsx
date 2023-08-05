@@ -24,7 +24,7 @@ const CartProduct = ({ product, setCart }) => {
     }
   }
 
-  async function updateItem(qty) {
+  async function updateItem(updatedQty) {
     try {
       console.log('quantity', qty);
       const req = {
@@ -32,7 +32,7 @@ const CartProduct = ({ product, setCart }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ productId, qty }),
+        body: JSON.stringify({ productId, qty: updatedQty }),
       };
       const res = await fetch('/api/cart/update', req);
       if (!res.ok) throw new Error(`fetch Error ${res.status}`);

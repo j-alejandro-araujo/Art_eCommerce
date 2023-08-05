@@ -38,9 +38,9 @@ const ProductDetails = () => {
 
   async function handleAddToCart() {
     try {
-      const quantity = 1;
+      const qty = 1;
       const cartId = userCartId;
-      const addedProduct = await addToCart(productId, quantity, cartId);
+      const addedProduct = await addToCart(productId, qty, cartId);
       const updatedCart = [...cart];
       updatedCart.push(addedProduct);
       setCart(updatedCart);

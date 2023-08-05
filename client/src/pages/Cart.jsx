@@ -70,7 +70,7 @@ export default function Cart() {
   function getCartQuantity(cart) {
     let quantity = 0;
     cart?.forEach((item) => {
-      quantity += item.quantity;
+      quantity += item.qty;
     });
     return quantity;
   }
@@ -78,7 +78,7 @@ export default function Cart() {
   function getCartTotal(cart) {
     let total = 0;
     cart?.forEach((item) => {
-      total += item.price * item.quantity;
+      total += item.price * item.qty;
     });
     return `$${total.toFixed(2)}`;
   }

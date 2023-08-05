@@ -3,6 +3,8 @@ import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
 import ClientError from './lib/client-error.js';
 import pg from 'pg';
+import argon2 from 'argon2';
+import jwt from 'jsonwebtoken';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -110,6 +112,87 @@ app.post('/api/cart/update', async (req, res, next) => {
     const params = [productId, cartId, qty];
     await db.query(sql, params);
     res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/cart/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const sql = `
+      select *
+        from "products"
+        join "cartItem" using ("productId")
+        join "cart" using ("cartId")
+        join "user" using ("userId")
+       where "user"."userId" = $1
+    `;
+    const params = [userId];
+    const result = await db.query(sql, params);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/auth/sign-up', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new ClientError(400, 'username and password are required.');
+    }
+    const hashedPassword = await argon2.hash(password);
+    const sql = `
+      insert into "users" ("username", "hashedPassword")
+      values ($1, $2)
+      returning *
+    `;
+    const params = [username, hashedPassword];
+    const result = await db.query(sql, params);
+    const [user] = result.rows;
+    const cartSql = `
+      insert into "shoppingCart" ("userId")
+      values ($1)
+      returning *
+    `;
+    const cartParams = [user.userId];
+    await db.query(cartSql, cartParams);
+    res.status(201).json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/auth/sign-in', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new ClientError(401, 'invalid login');
+    }
+    const sql = `
+      select "userId",
+             "hashedPassword",
+             "cartId"
+        from "user"
+        join "cart" using ("userId")
+       where "username" = $1
+    `;
+    const params = [username];
+    const result = await db.query(sql, params);
+    const [user] = result.rows;
+    if (!user) {
+      throw new ClientError(401, 'invalid login');
+    }
+
+    const { userId, hashedPassword, cartId } = user;
+
+    if (!(await argon2.verify(hashedPassword, password))) {
+      throw new ClientError(401, 'invalid login');
+    }
+    const payload = { userId, username, cartId };
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+    res.json({ token, user: payload });
   } catch (err) {
     next(err);
   }
