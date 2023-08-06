@@ -1,9 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import GlobalContext from '../components/GlobalContext';
+import GlobalContext from '../components/GlobalContext';
 import CartProduct from '../components/CartProduct';
+import { useNavigate } from 'react-router-dom';
+import { fetchCart } from '../lib/api';
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
+  const { user } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !user && navigate('/sign-in');
+    async function loadCart(userId) {
+      try {
+        const cart = await fetchCart(userId);
+        setCart(cart);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    user && loadCart(user.userId);
+  }, [user, navigate]);
 
   return (
     <section className="h-100 gradient-custom">
@@ -40,10 +57,6 @@ export default function Cart() {
                     Subtotal
                     <span>{getCartTotal(cart)}</span>
                   </li>
-                  <li className="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Shipping
-                    <span>Free</span>
-                  </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                     <div>
                       <strong>Total amount</strong>
@@ -53,12 +66,7 @@ export default function Cart() {
                     </span>
                   </li>
                 </ul>
-                <button
-                  type="button"
-                  className="btn btn-primary btn-lg btn-block"
-                  onClick={handleCheckout}>
-                  Go to checkout
-                </button>
+                <button>Checkout</button>
               </div>
             </div>
           </div>
