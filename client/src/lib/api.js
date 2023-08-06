@@ -34,19 +34,26 @@ export async function signIn(username, password) {
   return authenticate('sign-in', username, password);
 }
 
-export async function signUp(username, password) {
-  return authenticate('sign-up', username, password);
+export async function signUp(username, email, password) {
+  return authenticate('sign-up', username, email, password);
 }
 
-export async function authenticate(action, username, password) {
+export async function authenticate(action, username, email, password) {
   const req = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ username, email, password }),
   };
-  const res = await fetch(`/api/auth/${action}`, req);
-  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
-  return res.json();
+
+  try {
+    const res = await fetch(`/api/auth/${action}`, req);
+    if (!res.ok) {
+      throw new Error(`fetch Error ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    throw new Error(`Network Error: ${err.message}`);
+  }
 }

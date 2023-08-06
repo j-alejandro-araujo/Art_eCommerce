@@ -123,7 +123,7 @@ app.get('/api/cart/:userId', async (req, res, next) => {
     const sql = `
       select *
         from "products"
-        join "cartItem" using ("productId")
+        join "cartItems" using ("productId")
         join "cart" using ("cartId")
         join "user" using ("userId")
        where "user"."userId" = $1
@@ -138,21 +138,21 @@ app.get('/api/cart/:userId', async (req, res, next) => {
 
 app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
-    const { username, password } = req.body;
-    if (!username || !password) {
-      throw new ClientError(400, 'username and password are required.');
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+      throw new ClientError(400, 'username, email, and password are required.');
     }
     const hashedPassword = await argon2.hash(password);
     const sql = `
-      insert into "users" ("username", "hashedPassword")
-      values ($1, $2)
+      insert into "user" ("username", "hashedPassword", "email")
+      values ($1, $2, $3)
       returning *
     `;
-    const params = [username, hashedPassword];
+    const params = [username, hashedPassword, email];
     const result = await db.query(sql, params);
     const [user] = result.rows;
     const cartSql = `
-      insert into "shoppingCart" ("userId")
+      insert into "cart" ("userId")
       values ($1)
       returning *
     `;
@@ -160,6 +160,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     await db.query(cartSql, cartParams);
     res.status(201).json(user);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 });

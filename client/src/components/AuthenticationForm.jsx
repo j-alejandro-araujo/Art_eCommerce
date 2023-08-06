@@ -9,9 +9,11 @@ export default function AuthForm({ action, onSignIn }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const { username, password } = Object.fromEntries(formData.entries());
+    const { username, email, password } = Object.fromEntries(
+      formData.entries()
+    );
     try {
-      const result = await authenticate(action, username, password);
+      const result = await authenticate(action, username, email, password);
       if (action === 'sign-up') {
         navigate('/sign-in');
       } else if (result.user && result.token) {
@@ -23,8 +25,7 @@ export default function AuthForm({ action, onSignIn }) {
   }
 
   const altRoute = action === 'sign-up' ? '/sign-in' : '/sign-up';
-  const altActionMessage =
-    action === 'sign-up' ? 'Sign in instead' : 'Register now';
+  const altActionMessage = action === 'sign-up' ? 'Sign in' : 'Register';
   const actionBtnText = action === 'sign-up' ? 'Register' : 'Log In';
 
   return (
@@ -41,6 +42,14 @@ export default function AuthForm({ action, onSignIn }) {
           />
         </label>
       </div>
+      {action === 'sign-up' && (
+        <div className="mb-3">
+          <label className="form-label">
+            Email:
+            <input required type="email" name="email" className="form-input" />
+          </label>
+        </div>
+      )}
       <div className="mb-3">
         <label className="form-label">
           Password:

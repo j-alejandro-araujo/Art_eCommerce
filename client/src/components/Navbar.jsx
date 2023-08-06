@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
@@ -6,12 +6,13 @@ import {
   faCartShopping,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, Outlet } from 'react-router-dom';
+import GlobalContext from './GlobalContext';
+import CartContext from './CartContext';
 
 const Navbar = () => {
-  // const navigate = useNavigate();
+  const { user, handleSignout } = useContext(GlobalContext);
+  const { cart } = useContext(CartContext);
 
-  // const handleAllClick = () => {
-  //   navigate('/product');
   return (
     <>
       <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
@@ -31,11 +32,17 @@ const Navbar = () => {
           />
         </div>
         <div className="flex items-center">
-          <p>Sign in</p>
+          <div>
+            {user && <div onClick={handleSignout}>Sign out</div>}
+            {!user && <Link to="/sign-in">Sign in</Link>}
+          </div>
           <p>|</p>
           {/* Shopping Cart */}
-          <Link to="cart">
+          <Link to="/cart">
             <FontAwesomeIcon icon={faCartShopping} />
+            {cart.length > 0 && (
+              <span className="cart-badge">{cart.length}</span>
+            )}
           </Link>
         </div>
       </div>
@@ -43,7 +50,7 @@ const Navbar = () => {
       <div>
         <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
           {/* Bottom Side */}
-          <Link to="products">
+          <Link to="/products">
             ALL
             <FontAwesomeIcon icon={faBars} />
           </Link>

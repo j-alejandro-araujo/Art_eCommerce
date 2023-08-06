@@ -1,14 +1,17 @@
 import { useEffect, useState, useContext } from 'react';
 import { fetchProduct, addToCart } from '../lib/api';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import CartContext from '../components/CartContext';
+import GlobalContext from '../components/GlobalContext';
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const { productId } = useParams();
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const { cart, setCart, userCartId } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
+  const { user } = useContext(GlobalContext);
 
   useEffect(() => {
     async function loadProduct(productId) {
@@ -37,13 +40,26 @@ const ProductDetails = () => {
   const { name, image, price, description } = product;
 
   async function handleAddToCart() {
+    if (!user) {
+      navigate('/sign-in');
+      return;
+    }
+
     try {
       const qty = 1;
-      const cartId = userCartId;
-      const addedProduct = await addToCart(productId, qty, cartId);
-      const updatedCart = [...cart];
-      updatedCart.push(addedProduct);
-      setCart(updatedCart);
+      const cartId = user.cartId;
+      const existingProductIndex = cart.findIndex(
+        (item) => item.productId === productId
+      );
+
+      if (existingProductIndex !== -1) {
+        const updatedCart = [...cart];
+        updatedCart[existingProductIndex].qty += qty;
+        setCart(updatedCart);
+      } else {
+        const addedProduct = await addToCart(productId, qty, cartId);
+        setCart([...cart, addedProduct]);
+      }
     } catch (err) {
       console.error(err);
     }

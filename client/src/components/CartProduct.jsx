@@ -51,10 +51,12 @@ const CartProduct = ({ product, setCart }) => {
   return (
     <div className="row">
       <div className="col-lg-3 col-md-12 md-4 md-lg-0 d-flex align-items-center justify-content-center">
-        <div
-          className="bg-image hover-overlay hover-zoom ripple rounded"
-          data-mdb-ripple-color="light">
-          <img src={image} className="img-fluid" alt={name} />
+        <div className="bg-image hover-overlay hover-zoom ripple rounded w-24 h-24">
+          <img
+            src={image}
+            className="img-fluid w-full h-full object-cover"
+            alt={name}
+          />
         </div>
       </div>
       <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
@@ -67,6 +69,7 @@ const CartProduct = ({ product, setCart }) => {
           className="btn btn-danger btn-sm me-1 mb-2"
           onClick={handleRemoveItem}>
           <i className="fas fa-trash" />
+          Remove
         </button>
       </div>
       <Quantity

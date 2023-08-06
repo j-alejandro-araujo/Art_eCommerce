@@ -41,14 +41,14 @@ function App() {
     user && loadCart(user.userId);
   }, [user]);
 
-  function handleSignIn(auth) {
+  function handleSignin(auth) {
     localStorage.setItem(tokenKey, JSON.stringify(auth));
     const { user, token } = auth;
     setUser(user);
     setToken(token);
   }
 
-  function handleSignOut() {
+  function handleSignout() {
     localStorage.removeItem(tokenKey);
     setUser(undefined);
     setToken(undefined);
@@ -57,7 +57,7 @@ function App() {
 
   if (isAuthorizing) return null;
 
-  const globalContextValue = { user, token, handleSignIn, handleSignOut };
+  const globalContextValue = { user, token, handleSignin, handleSignout };
   const cartContextValue = { cart, setCart };
 
   return (
