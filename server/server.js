@@ -83,14 +83,14 @@ app.post('/api/cart/addtocart', async (req, res, next) => {
   }
 });
 
-app.post('/api/cart/removeitem', async (req, res, next) => {
+app.delete('/api/cart/removeitem', async (req, res, next) => {
   try {
     const { productId, cartId } = req.body;
     const sql = `
-      delete
+        delete
         from "cartItems"
-       where "productId" = $1
-         and "cartId" = $2
+        where "productId" = $1
+        and "cartId" = $2
     `;
     const params = [productId, cartId];
     await db.query(sql, params);

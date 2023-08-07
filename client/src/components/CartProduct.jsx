@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import Quantity from './Quantity';
 
 const CartProduct = ({ product, setCart }) => {
-  const { name, qty, price, image, productId } = product;
+  const { name, qty, price, image, productId, cartId } = product;
   const [updatedQuantity, setUpdatedQuantity] = useState(qty);
 
   async function handleRemoveItem() {
     try {
       const req = {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify({ productId, cartId }),
       };
       const res = await fetch('/api/cart/removeitem', req);
       console.log('Response from server:', res); //check
@@ -40,7 +40,7 @@ const CartProduct = ({ product, setCart }) => {
       setCart((prev) =>
         prev.map((cartedItem) =>
           cartedItem.productId === productId
-            ? { ...cartedItem, quantity: qty }
+            ? { ...cartedItem, quantity: updatedQty }
             : cartedItem
         )
       );

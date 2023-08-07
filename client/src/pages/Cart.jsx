@@ -10,32 +10,17 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/sign-in');
-    } else {
-      loadCart(user.userId);
+    !user && navigate('/sign-in');
+    async function loadCart(userId) {
+      try {
+        const cart = await fetchCart(userId);
+        setCart(cart);
+      } catch (err) {
+        console.error(err);
+      }
     }
+    user && loadCart(user.userId);
   }, [user, navigate]);
-
-  async function loadCart(userId) {
-    try {
-      const cart = await fetchCart(userId);
-      const uniqueCart = cart.reduce((acc, curr) => {
-        const index = acc.findIndex(
-          (item) => item.productId === curr.productId
-        );
-        if (index === -1) {
-          acc.push(curr);
-        } else {
-          acc[index].qty += curr.qty;
-        }
-        return acc;
-      }, []);
-      setCart(uniqueCart);
-    } catch (err) {
-      console.error(err);
-    }
-  }
 
   function getCartQuantity(cart) {
     let quantity = 0;
