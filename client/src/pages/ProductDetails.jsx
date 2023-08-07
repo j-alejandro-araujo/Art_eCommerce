@@ -44,22 +44,13 @@ const ProductDetails = () => {
       navigate('/sign-in');
       return;
     }
-
     try {
       const qty = 1;
       const cartId = user.cartId;
-      const existingProductIndex = cart.findIndex(
-        (item) => item.productId === productId
-      );
-
-      if (existingProductIndex !== -1) {
-        const updatedCart = [...cart];
-        updatedCart[existingProductIndex].qty += qty;
-        setCart(updatedCart);
-      } else {
-        const addedProduct = await addToCart(productId, qty, cartId);
-        setCart([...cart, addedProduct]);
-      }
+      const addedProduct = await addToCart(productId, qty, cartId);
+      const updatedCart = [...cart];
+      updatedCart.push(addedProduct);
+      setCart(updatedCart);
     } catch (err) {
       console.error(err);
     }

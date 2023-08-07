@@ -20,7 +20,18 @@ const Cart = () => {
   async function loadCart(userId) {
     try {
       const cart = await fetchCart(userId);
-      setCart(cart);
+      const uniqueCart = cart.reduce((acc, curr) => {
+        const index = acc.findIndex(
+          (item) => item.productId === curr.productId
+        );
+        if (index === -1) {
+          acc.push(curr);
+        } else {
+          acc[index].qty += curr.qty;
+        }
+        return acc;
+      }, []);
+      setCart(uniqueCart);
     } catch (err) {
       console.error(err);
     }
@@ -43,14 +54,14 @@ const Cart = () => {
   }
 
   return (
-    <div className="h-100 gradient-custom">
+    <div className="h-100 gradient-custom w-full">
       <div className="container py-5">
-        <div className="flex justify-center my-4">
+        <div className="flex justify-center my-4 flex-col lg:flex-row">
           {/* Display Cart Items */}
-          <div className="w-3/4">
+          <div className="w-full lg:w-3/4 mb-4 lg:mb-0">
             <div className="bg-white shadow-md rounded-md p-4 ml-8">
               <h3 className="text-xl font-semibold mb-4">
-                Cart - {getCartQuantity(cart)} items
+                Cart ({getCartQuantity(cart)} items)
               </h3>
               <ul className="divide-y divide-gray-300">
                 {cart?.map((product) => (
@@ -63,8 +74,8 @@ const Cart = () => {
           </div>
 
           {/* Display Summary */}
-          <div className="w-1/3 ml-4">
-            <div className="bg-white shadow-md rounded-md p-4 ml-4 mr-4">
+          <div className="w-full lg:w-1/3 ml-4">
+            <div className="bg-white shadow-md rounded-md p-4 ml-4 mr-4 mt-4 lg:mt-0">
               <h3 className="text-xl font-semibold mb-4">Summary</h3>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">

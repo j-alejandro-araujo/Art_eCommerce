@@ -15,6 +15,7 @@ const CartProduct = ({ product, setCart }) => {
         body: JSON.stringify({ productId }),
       };
       const res = await fetch('/api/cart/removeitem', req);
+      console.log('Response from server:', res); //check
       if (!res.ok) throw new Error(`fetch Error ${res.status}`);
       setCart((prev) =>
         prev.filter((cartedItem) => cartedItem.productId !== productId)
@@ -49,26 +50,19 @@ const CartProduct = ({ product, setCart }) => {
   }
 
   return (
-    <div className="row">
-      <div className="col-lg-3 col-md-12 md-4 md-lg-0 d-flex align-items-center justify-content-center">
-        <div className="bg-image hover-overlay hover-zoom ripple rounded w-24 h-24">
-          <img
-            src={image}
-            className="img-fluid w-full h-full object-cover"
-            alt={name}
-          />
-        </div>
+    <div className="flex items-center mb-4">
+      <div className="w-24 h-24 aspect-w-1 bg-image hover-overlay hover-zoom ripple rounded">
+        <img src={image} className="w-full h-full object-cover" alt={name} />
       </div>
-      <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
+      <div className="flex-grow ml-4">
         <p>
           <strong>{name}</strong>
         </p>
         <p>Price: ${price}</p>
         <button
           type="button"
-          className="btn btn-danger btn-sm me-1 mb-2"
+          className="text-red-600"
           onClick={handleRemoveItem}>
-          <i className="fas fa-trash" />
           Remove
         </button>
       </div>

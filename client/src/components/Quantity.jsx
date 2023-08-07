@@ -21,7 +21,7 @@ const Quantity = ({ initialQuantity, updateItem }) => {
 
   return (
     <div className="border border-secondary inline-block p-3 relative rounded mt-3">
-      <div className="absolute top-0 left-0 transform -translate-y-3/4 bg-white px-2 font-semibold">
+      <div className="absolute top-0 left-5 transform -translate-y-3/4 bg-white px-2 font-semibold">
         Quantity
       </div>
       <div className="input-group flex items-center">

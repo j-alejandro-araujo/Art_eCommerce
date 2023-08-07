@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { fetchCart } from './lib/api';
 import GlobalContext from './components/GlobalContext';
 import CartContext from './components/CartContext';
@@ -9,25 +9,11 @@ import Catalog from './pages/Catalog';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import AuthenticationPage from './pages/AuthenticationPage';
-
-const tokenKey = 'react-context-jwt';
+import { useAuth } from './useAuth';
 
 function App() {
-  const [user, setUser] = useState();
-  const [token, setToken] = useState();
+  const { user, token, isAuthorizing, handleSignin, handleSignout } = useAuth();
   const [cart, setCart] = useState([]);
-  const [isAuthorizing, setIsAuthorizing] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const auth = localStorage.getItem(tokenKey);
-    if (auth) {
-      const { user, token } = JSON.parse(auth);
-      setUser(user);
-      setToken(token);
-    }
-    setIsAuthorizing(false);
-  }, []);
 
   useEffect(() => {
     async function loadCart(userId) {
@@ -39,21 +25,7 @@ function App() {
       }
     }
     user && loadCart(user.userId);
-  }, [user]);
-
-  function handleSignin(auth) {
-    localStorage.setItem(tokenKey, JSON.stringify(auth));
-    const { user, token } = auth;
-    setUser(user);
-    setToken(token);
-  }
-
-  function handleSignout() {
-    localStorage.removeItem(tokenKey);
-    setUser(undefined);
-    setToken(undefined);
-    navigate('/products');
-  }
+  }, [user, setCart]);
 
   if (isAuthorizing) return null;
 
