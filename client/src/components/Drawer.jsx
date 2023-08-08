@@ -33,7 +33,9 @@ export function NavDrawer() {
               <div className="flex-1 h-0 overflow-y-auto">
                 <div className="p-6">
                   <div className="mb-6 flex items-center justify-between py-2 px-4 p-0">
-                    <h2 className="">Hello, sign in</h2>
+                    <h2 className="text-3xl font-bold cursor-pointer hover:text-[#2BA3C6]">
+                      Hello, sign in
+                    </h2>
                     <button className="text-blue-gray" onClick={closeDrawer}>
                       <FontAwesomeIcon
                         icon={faXmark}
@@ -41,10 +43,36 @@ export function NavDrawer() {
                       />
                     </button>
                   </div>
-                  <p className="mb-8 pr-4">Let's see if this works!</p>
-                  <div className="flex gap-2">
-                    <button className="">TEST BUTTON</button>
-                  </div>
+                  <hr className="my-4 border-t border-gray-400" />
+                  <ul className="mb-4 space-y-2">
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      PAINT
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      CANVAS
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      BRUSHES
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      DRAWING
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      SCULPTING
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      PENCILS
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      FRAMING
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      PRINTMAKING
+                    </li>
+                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                      FABRIC
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
