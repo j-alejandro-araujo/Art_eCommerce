@@ -5,6 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
 import CartContext from './CartContext';
 import { NavDrawer } from './Drawer';
+import logo from '../logo.png';
 
 const Navbar = () => {
   const { user, handleSignout } = useContext(GlobalContext);
@@ -14,13 +15,14 @@ const Navbar = () => {
     <nav>
       <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
         {/* Top Side */}
-        <Link to="/">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2">
-            ART<span className="font-bold text-[#EE2D25]">STORE</span>
+        <Link to="/" className="flex">
+          <img src={logo} alt="logo" className="w-16 h-16 hidden sm:block" />
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl pt-3">
+            ART<span className="font-bold text-[#EE2D25]">MANIA</span>
           </h1>
         </Link>
         {/* Search Input */}
-        <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]">
+        <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[300px] m:w-[400px] lg:w-[600px]">
           <FontAwesomeIcon icon={faSearch} />
           <input
             className="bg-transparent p-2 w-full focus:outline-none"

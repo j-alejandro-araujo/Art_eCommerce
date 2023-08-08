@@ -25,21 +25,20 @@ const CartProduct = ({ product, setCart }) => {
     }
   }
 
-  async function updateItem(updatedQty) {
+  async function updateItem(updatedQty, cartId, productId) {
     try {
-      console.log('quantity', qty);
       const req = {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ productId, qty: updatedQty }),
+        body: JSON.stringify({ cartId, productId, qty: updatedQty }),
       };
       const res = await fetch('/api/cart/update', req);
       if (!res.ok) throw new Error(`fetch Error ${res.status}`);
       setCart((prev) =>
         prev.map((cartedItem) =>
-          cartedItem.productId === productId
+          cartedItem.productId === productId && cartedItem.cartId === cartId
             ? { ...cartedItem, quantity: updatedQty }
             : cartedItem
         )

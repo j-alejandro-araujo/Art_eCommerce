@@ -1,12 +1,13 @@
 import { useEffect, useState, useContext } from 'react';
-import { fetchProduct, addToCart } from '../lib/api';
+import { fetchProduct, addToCart, updateCart } from '../lib/api';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import CartContext from '../components/CartContext';
 import GlobalContext from '../components/GlobalContext';
 
 const ProductDetails = () => {
   const navigate = useNavigate();
-  const { productId } = useParams();
+  let { productId } = useParams();
+  productId = Number(productId);
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
@@ -51,7 +52,6 @@ const ProductDetails = () => {
     try {
       const qty = 1;
       const cartId = user.cartId;
-      console.log('Cart before:', cart);
       const existingCartItem = cart.find(
         (item) => item.productId === productId
       );
@@ -62,6 +62,7 @@ const ProductDetails = () => {
         );
         console.log('Updated cart:', updatedCart);
         setCart(updatedCart);
+        await updateCart(); // Need to call updateCart function for server and client side qty to match
       } else {
         console.log('Adding new item to cart...');
         const addedProduct = await addToCart(productId, qty, cartId);

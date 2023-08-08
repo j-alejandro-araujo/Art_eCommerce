@@ -22,10 +22,10 @@ const Cart = () => {
     user && loadCart(user.userId);
   }, [user, navigate]);
 
-  function getCartQuantity(cart) {
+  function getCartQty(cart) {
     let quantity = 0;
     cart?.forEach((item) => {
-      quantity += item.qty;
+      quantity += Number(item.qty);
     });
     return quantity;
   }
@@ -46,11 +46,11 @@ const Cart = () => {
           <div className="w-full lg:w-3/4 mb-4 lg:mb-0">
             <div className="bg-white shadow-md rounded-md p-4 ml-8">
               <h3 className="text-xl font-semibold mb-4">
-                Cart ({getCartQuantity(cart)} items)
+                Cart ({getCartQty(cart)} items)
               </h3>
               <ul className="divide-y divide-gray-300">
                 {cart?.map((product) => (
-                  <li key={product.productId} className="py-4">
+                  <li key={product.cartItemId} className="py-4">
                     <CartProduct product={product} setCart={setCart} />
                   </li>
                 ))}
@@ -63,13 +63,9 @@ const Cart = () => {
             <div className="bg-white shadow-md rounded-md p-4 ml-4 mr-4 mt-4 lg:mt-0">
               <h3 className="text-xl font-semibold mb-4">Summary</h3>
               <ul className="list-group list-group-flush">
-                <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                  Subtotal
-                  <span>{getCartTotal(cart)}</span>
-                </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                   <div>
-                    <strong>Total amount</strong>
+                    <strong>Total Amount</strong>
                   </div>
                   <span>
                     <strong>{getCartTotal(cart)}</strong>

@@ -68,7 +68,8 @@ app.post('/api/cart/addtocart', async (req, res, next) => {
   try {
     const { productId, qty, cartId } = req.body;
     const sql = `
-    insert into "cartItems" ("productId", "qty", "cartId")
+    insert
+    into "cartItems" ("productId", "qty", "cartId")
     values ($1, $2, $3)
     returning *
     `;
@@ -100,7 +101,7 @@ app.delete('/api/cart/removeitem', async (req, res, next) => {
   }
 });
 
-app.post('/api/cart/update', async (req, res, next) => {
+app.put('/api/cart/update', async (req, res, next) => {
   try {
     const { productId, cartId, qty } = req.body;
     const sql = `
