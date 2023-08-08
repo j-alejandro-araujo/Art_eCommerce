@@ -43,7 +43,7 @@ const Catalog = () => {
                     {product.name}
                   </h3>
                   <span className="badge bg-light pt-2 text-dark">
-                    {product.price}
+                    ${product.price}
                   </span>
                 </div>
               </div>

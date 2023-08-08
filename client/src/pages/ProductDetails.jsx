@@ -16,7 +16,9 @@ const ProductDetails = () => {
   useEffect(() => {
     async function loadProduct(productId) {
       try {
+        console.log('Fetching product...');
         const product = await fetchProduct(productId);
+        console.log('Fetched product:', product);
         setProduct(product);
       } catch (err) {
         setError(err);
@@ -26,6 +28,8 @@ const ProductDetails = () => {
     }
     loadProduct(productId);
   }, [productId]);
+
+  console.log('Cart:', cart);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) {
@@ -47,10 +51,23 @@ const ProductDetails = () => {
     try {
       const qty = 1;
       const cartId = user.cartId;
-      const addedProduct = await addToCart(productId, qty, cartId);
-      const updatedCart = [...cart];
-      updatedCart.push(addedProduct);
-      setCart(updatedCart);
+      console.log('Cart before:', cart);
+      const existingCartItem = cart.find(
+        (item) => item.productId === productId
+      );
+
+      if (existingCartItem) {
+        const updatedCart = cart.map((item) =>
+          item.productId === productId ? { ...item, qty: item.qty + qty } : item
+        );
+        console.log('Updated cart:', updatedCart);
+        setCart(updatedCart);
+      } else {
+        console.log('Adding new item to cart...');
+        const addedProduct = await addToCart(productId, qty, cartId);
+        console.log('Added product:', addedProduct);
+        setCart([...cart, addedProduct]);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -72,8 +89,10 @@ const ProductDetails = () => {
         <div className="md:w-1/2 mt-4 md:mt-0">
           <h2 className="text-3xl font-bold mb-4">{name}</h2>
           <p className="text-lg">{description}</p>
-          <p className="mt-2 text-lg font-bold">Price: ${price}</p>
-          <button className="btn btn-primary" onClick={handleAddToCart}>
+          <p className="mt-2 mb-2 text-lg font-bold">Price: ${price}</p>
+          <button
+            className="bg-[#FDB000] hover:bg-[#ffc745] text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+            onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>

@@ -76,7 +76,7 @@ const Cart = () => {
                   </span>
                 </li>
               </ul>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+              <button className="bg-[#2BA3C6] hover:bg-[#1b81a0] text-white font-bold py-2 px-4 rounded w-full">
                 Checkout
               </button>
             </div>

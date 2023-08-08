@@ -25,7 +25,7 @@ export default function AuthForm({ action, onSignIn }) {
   }
 
   const altRoute = action === 'sign-up' ? '/sign-in' : '/sign-up';
-  const altActionMessage = action === 'sign-up' ? 'Sign in' : 'Register';
+  const altActionMessage = action === 'sign-up' ? 'Sign in' : 'Register here!';
   const actionBtnText = action === 'sign-up' ? 'Register' : 'Log In';
 
   return (
@@ -69,7 +69,7 @@ export default function AuthForm({ action, onSignIn }) {
         </small>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          className="bg-[#2BA3C6] hover:bg-[#1b81a0] text-white font-bold py-2 px-4 rounded">
           {actionBtnText}
         </button>
       </div>
