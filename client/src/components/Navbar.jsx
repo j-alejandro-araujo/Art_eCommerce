@@ -17,7 +17,7 @@ const Navbar = () => {
         {/* Top Side */}
         <Link to="/" className="flex">
           <img src={logo} alt="logo" className="w-16 h-16 hidden sm:block" />
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl pt-3">
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl pt-3">
             ART<span className="font-bold text-[#EE2D25]">MANIA</span>
           </h1>
         </Link>
@@ -59,11 +59,12 @@ const Navbar = () => {
       </div>
 
       <div>
-        <div className="bg-white shadow-md max-w-[1640px] mx-auto flex justify-between items-center p-4">
+        <div className="bg-white shadow-md max-w-[1640px] mx-auto flex justify-between items-center p-4 pb-8">
           {/* Bottom Side */}
           <div className="z-50">
             <NavDrawer />
           </div>
+          {/* Turn this into an UL w/ Li */}
           <Link to="/products">
             <p className="cursor-pointer relative group whitespace-nowrap">
               ALL
@@ -71,27 +72,27 @@ const Navbar = () => {
             </p>
           </Link>
           <p className="cursor-pointer relative group whitespace-nowrap">
-            PAINT
+            Paint
             <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </p>
           <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap">
-            CANVAS
+            Canvas
             <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </p>
           <p className=" cursor-pointer relative group whitespace-nowrap">
-            BRUSHES
+            Brushes
             <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </p>
           <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap">
-            DRAWING
+            Drawing
             <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </p>
           <p className="cursor-pointer relative group whitespace-nowrap">
-            SCULPTING
+            Sculpting
             <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </p>
           <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap">
-            PENCILS
+            Pencils
             <span className="cursor-pointer absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </p>
         </div>

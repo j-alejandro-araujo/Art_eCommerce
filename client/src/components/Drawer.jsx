@@ -10,7 +10,9 @@ export function NavDrawer() {
 
   return (
     <>
-      <button onClick={openDrawer} className="cursor-pointer">
+      <button
+        onClick={openDrawer}
+        className="cursor-pointer flex justify-center">
         <FontAwesomeIcon icon={faBars} />
       </button>
       <div
@@ -44,33 +46,42 @@ export function NavDrawer() {
                     </button>
                   </div>
                   <hr className="my-4 border-t border-gray-400" />
-                  <ul className="mb-4 space-y-2">
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                  <ul className="mb-4 space-y-5">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       PAINT
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       CANVAS
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       BRUSHES
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       DRAWING
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       SCULPTING
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       PENCILS
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       FRAMING
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       PRINTMAKING
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
-                    <li className="hover:bg-[#2ba2c628] rounded-3xl cursor-pointer text-center py-2">
+                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                       FABRIC
+                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </li>
                   </ul>
                 </div>
