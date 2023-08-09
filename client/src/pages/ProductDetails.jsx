@@ -74,11 +74,17 @@ const ProductDetails = () => {
     }
   }
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="container mx-auto my-8">
-      <Link to="/products" className="text-blue-600 hover:underline">
-        Back to Products
-      </Link>
+      <button
+        className="text-blue-600 hover:underline mb-4"
+        onClick={handleGoBack}>
+        Back to Previous Page
+      </button>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row px-4 mt-4 md:gap-8">
         <div className="md:w-1/2">
           <img
