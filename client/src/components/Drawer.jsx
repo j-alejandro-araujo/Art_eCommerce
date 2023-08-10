@@ -48,55 +48,55 @@ export function NavDrawer() {
                   </div>
                   <hr className="my-4 border-t border-gray-400" />
                   <ul className="mb-4 space-y-5">
-                    <Link to="/paint">
+                    <Link to="/paint" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap">
                         PAINT
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/canvas">
+                    <Link to="/canvas" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         CANVAS
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/brushes">
+                    <Link to="/brushes" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         BRUSHES
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/drawing">
+                    <Link to="/drawing" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         DRAWING
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/sculpting">
+                    <Link to="/sculpting" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         SCULPTING
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/pencils">
+                    <Link to="/pencils" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         PENCILS
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/framing">
+                    <Link to="/framing" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         FRAMING
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/printmaking">
+                    <Link to="/printmaking" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         PRINTMAKING
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                       </li>
                     </Link>
-                    <Link to="/fabric">
+                    <Link to="/fabric" onClick={closeDrawer}>
                       <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
                         FABRIC
                         <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
