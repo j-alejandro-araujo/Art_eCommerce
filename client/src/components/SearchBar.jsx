@@ -44,6 +44,7 @@ const SearchBar = () => {
   const handleResultClick = (productId) => {
     navigate(`/details/${productId}`);
     setSearchResultsVisible(false);
+    setSearchTerm('');
   };
 
   const handleOutsideClick = (e) => {
@@ -52,6 +53,7 @@ const SearchBar = () => {
       !resultsRef.current?.contains(e.target)
     ) {
       setSearchResultsVisible(false);
+      setSearchTerm('');
     }
   };
 
@@ -65,30 +67,32 @@ const SearchBar = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="relative bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[300px] m:w-[400px] lg:w-[600px]">
-      <FontAwesomeIcon icon={faSearch} />
-      <input
-        ref={inputRef}
-        className="bg-transparent p-2 w-full focus:outline-none"
-        type="search"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      {isSearchResultsVisible && (
-        <div
-          ref={resultsRef}
-          className="search-results absolute left-5 right-5 top-8 mt-2 p-2 bg-white border border-gray-300 shadow z-10">
-          {searchResults.map((result) => (
-            <div
-              key={result.productId}
-              className="search-result cursor-pointer hover:bg-gray-100 p-1"
-              onClick={() => handleResultClick(result.productId)}>
-              {result.name}
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="hidden sm:block">
+      <div className="relative bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[300px] m:w-[400px] lg:w-[600px]">
+        <FontAwesomeIcon icon={faSearch} />
+        <input
+          ref={inputRef}
+          className="bg-transparent p-2 w-full focus:outline-none"
+          type="search"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        {isSearchResultsVisible && (
+          <div
+            ref={resultsRef}
+            className="search-results absolute left-5 right-5 top-8 mt-2 p-2 bg-white border border-gray-300 shadow z-10">
+            {searchResults.map((result) => (
+              <div
+                key={result.productId}
+                className="search-result cursor-pointer hover:bg-gray-100 p-1"
+                onClick={() => handleResultClick(result.productId)}>
+                {result.name}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

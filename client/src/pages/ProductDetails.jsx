@@ -11,7 +11,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, updateCartItem } = useContext(CartContext);
   const { user } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -57,11 +57,7 @@ const ProductDetails = () => {
       );
       if (existingCartItem) {
         const updatedQty = Number(existingCartItem.qty) + qty;
-        const updatedCart = cart.map((item) =>
-          item.productId === productId ? { ...item, qty: updatedQty } : item
-        );
-        console.log('Updated cart:', updatedCart);
-        setCart(updatedCart);
+        updateCartItem(productId, updatedQty);
         await updateCart(cartId, productId, updatedQty);
       } else {
         console.log('Adding new item to cart...');

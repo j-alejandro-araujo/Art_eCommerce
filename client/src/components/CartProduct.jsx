@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Quantity from './Quantity';
-import { updateCart } from '../lib/api';
 import CartContext from '../components/CartContext';
 
-const CartProduct = ({ product, setCart }) => {
+const CartProduct = ({ product }) => {
   const { name, qty, price, image, productId, cartId } = product;
-  const [updatedQuantity, setUpdatedQuantity] = useState(qty);
-  const { setCart: updateCartInContext } = useContext(CartContext);
+  const { setCart: updateCartInContext, updateCartItem } =
+    useContext(CartContext);
 
   async function handleRemoveItem() {
     try {
@@ -18,7 +17,7 @@ const CartProduct = ({ product, setCart }) => {
         body: JSON.stringify({ productId, cartId }),
       };
       const res = await fetch('/api/cart/removeitem', req);
-      console.log('Response from server:', res); //check
+      console.log('Response from server:', res);
       if (!res.ok) throw new Error(`fetch Error ${res.status}`);
       updateCartInContext((prev) =>
         prev.filter((cartedItem) => cartedItem.productId !== productId)
@@ -46,9 +45,9 @@ const CartProduct = ({ product, setCart }) => {
         </button>
       </div>
       <Quantity
-        updatedQuantity={updatedQuantity}
-        setUpdatedQuantity={setUpdatedQuantity}
-        updateItem={updateCart}
+        productId={productId}
+        initialQuantity={qty}
+        updateCartItem={updateCartItem}
       />
     </div>
   );

@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import CartContext from './CartContext';
 
-const Quantity = ({ initialQuantity, updateItem }) => {
+const Quantity = ({ productId, initialQuantity }) => {
   const [updatedQuantity, setUpdatedQuantity] = useState(initialQuantity || 1);
+  const { updateCartItem } = useContext(CartContext);
 
   const handleMinusClick = () => {
     if (updatedQuantity > 1) {
-      const newQuantity = updatedQuantity - 1;
+      const newQuantity = Number(updatedQuantity) - 1;
       setUpdatedQuantity(newQuantity);
-      updateItem(newQuantity);
+      updateCartItem(productId, newQuantity);
     }
   };
 
   const handlePlusClick = () => {
-    const newQuantity = updatedQuantity + 1;
+    const newQuantity = Number(updatedQuantity) + 1;
     setUpdatedQuantity(newQuantity);
-    updateItem(newQuantity);
+    updateCartItem(productId, newQuantity);
   };
 
   return (

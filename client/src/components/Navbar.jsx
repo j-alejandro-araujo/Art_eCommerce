@@ -7,6 +7,7 @@ import CartContext from './CartContext';
 import { NavDrawer } from './Drawer';
 import logo from '../logo.png';
 import SearchBar from './SearchBar';
+import { getCartQty } from '../pages/Cart';
 
 const Navbar = () => {
   const { user, handleSignout } = useContext(GlobalContext);
@@ -18,7 +19,7 @@ const Navbar = () => {
         {/* Top Side */}
         <Link to="/" className="flex">
           <img src={logo} alt="logo" className="w-16 h-16 hidden sm:block" />
-          <h1 className="text-2xl sm:text-3xl lg:text-5xl pt-3">
+          <h1 className="text-4xl sm:text-4xl lg:text-5xl pt-3">
             ART<span className="font-bold text-[#EE2D25]">MANIA</span>
           </h1>
         </Link>
@@ -45,12 +46,15 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-          <p className="mr-3 ml-3">|</p>
+          <p className="mx-3">|</p>
           {/* Shopping Cart */}
-          <Link to="/cart" className="hover:text-[#EE2D25] mr-3">
-            <FontAwesomeIcon icon={faCartShopping} />
+          <Link to="/cart" className="hover:text-[#EE2D25] relative group">
+            <FontAwesomeIcon icon={faCartShopping} className="text-xl" />{' '}
+            {/* Adjust the size using text-xl */}
             {cart.length > 0 && (
-              <span className="cart-badge text-red-600">{cart.length}</span>
+              <span className="cart-badge absolute -top-4 right-1.5 -mt-2 -mr-2 px-2 py-1 text-xs bg-red-600 text-white rounded-full group-hover:opacity-100 transition-opacity">
+                {getCartQty(cart)}
+              </span>
             )}
           </Link>
         </div>

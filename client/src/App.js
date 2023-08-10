@@ -24,6 +24,14 @@ function App() {
   const { user, token, isAuthorizing, handleSignin, handleSignout } = useAuth();
   const [cart, setCart] = useState([]);
 
+  const updateCartItem = (productId, updatedQty) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.productId === productId ? { ...item, qty: updatedQty } : item
+      )
+    );
+  };
+
   useEffect(() => {
     async function loadCart(userId) {
       try {
@@ -39,7 +47,7 @@ function App() {
   if (isAuthorizing) return null;
 
   const globalContextValue = { user, token, handleSignin, handleSignout };
-  const cartContextValue = { cart, setCart };
+  const cartContextValue = { cart, setCart, updateCartItem };
 
   return (
     <GlobalContext.Provider value={globalContextValue}>
