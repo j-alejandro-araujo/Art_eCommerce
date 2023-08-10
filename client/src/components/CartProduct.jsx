@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Quantity from './Quantity';
+import { updateCart } from '../lib/api';
+import CartContext from '../components/CartContext';
 
 const CartProduct = ({ product, setCart }) => {
   const { name, qty, price, image, productId, cartId } = product;
   const [updatedQuantity, setUpdatedQuantity] = useState(qty);
+  const { setCart: updateCartInContext } = useContext(CartContext);
 
   async function handleRemoveItem() {
     try {
@@ -17,31 +20,8 @@ const CartProduct = ({ product, setCart }) => {
       const res = await fetch('/api/cart/removeitem', req);
       console.log('Response from server:', res); //check
       if (!res.ok) throw new Error(`fetch Error ${res.status}`);
-      setCart((prev) =>
+      updateCartInContext((prev) =>
         prev.filter((cartedItem) => cartedItem.productId !== productId)
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async function updateItem(updatedQty, cartId, productId) {
-    try {
-      const req = {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cartId, productId, qty: updatedQty }),
-      };
-      const res = await fetch('/api/cart/update', req);
-      if (!res.ok) throw new Error(`fetch Error ${res.status}`);
-      setCart((prev) =>
-        prev.map((cartedItem) =>
-          cartedItem.productId === productId && cartedItem.cartId === cartId
-            ? { ...cartedItem, quantity: updatedQty }
-            : cartedItem
-        )
       );
     } catch (err) {
       console.error(err);
@@ -68,7 +48,7 @@ const CartProduct = ({ product, setCart }) => {
       <Quantity
         updatedQuantity={updatedQuantity}
         setUpdatedQuantity={setUpdatedQuantity}
-        updateItem={updateItem}
+        updateItem={updateCart}
       />
     </div>
   );

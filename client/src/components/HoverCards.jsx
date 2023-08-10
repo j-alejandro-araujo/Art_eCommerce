@@ -6,6 +6,7 @@ import {
   faPalette,
   faScissors,
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const HoverCards = () => {
   return (
@@ -17,25 +18,25 @@ const HoverCards = () => {
         <Card
           title="Paint"
           subtitle="Brushes, acryclic, watercolor, and more."
-          href="#"
+          to="/paint"
           icon={faBrush}
         />
         <Card
           title="Drawing"
           subtitle="Pencils, pens, sketchbooks, and more."
-          href="#"
+          to="/drawing"
           icon={faPencil}
         />
         <Card
           title="Canvas"
           subtitle="Variety of canvas styles including cotton and linen."
-          href="#"
+          to="/canvas"
           icon={faPalette}
         />
         <Card
           title="Fabric"
           subtitle="Cotton, linen, silk, velvet, and more."
-          href="#"
+          to="/fabric"
           icon={faScissors}
         />
       </div>
@@ -43,10 +44,10 @@ const HoverCards = () => {
   );
 };
 
-const Card = ({ title, subtitle, icon, href }) => {
+const Card = ({ title, subtitle, icon, to }) => {
   return (
-    <a
-      href={href}
+    <Link
+      to={to}
       className="w-full p-4 rounded border-[1px] border-slate-200 relative overflow-hidden group bg-white">
       <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-[#2BA3C6] translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
       <FontAwesomeIcon
@@ -59,7 +60,7 @@ const Card = ({ title, subtitle, icon, href }) => {
       <p className="text-gray-400 group-hover:text-gray-100 relative z-10 duration-300">
         {subtitle}
       </p>
-    </a>
+    </Link>
   );
 };
 

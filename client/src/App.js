@@ -10,6 +10,15 @@ import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import AuthenticationPage from './pages/AuthenticationPage';
 import { useAuth } from './useAuth';
+import Paint from './pages/Paint';
+import Canvas from './pages/Canvas';
+import Brushes from './pages/Brushes';
+import Drawing from './pages/Drawing';
+import Sculpting from './pages/Sculpting';
+import Pencils from './pages/Pencils';
+import Framing from './pages/Framing';
+import PrintMaking from './pages/PrintMaking';
+import Fabric from './pages/Fabric';
 
 function App() {
   const { user, token, isAuthorizing, handleSignin, handleSignout } = useAuth();
@@ -49,6 +58,15 @@ function App() {
               element={<AuthenticationPage action="sign-up" />}
             />
             <Route path="cart" element={<Cart />} />
+            <Route path="paint" element={<Paint />} />
+            <Route path="canvas" element={<Canvas />} />
+            <Route path="brushes" element={<Brushes />} />
+            <Route path="drawing" element={<Drawing />} />
+            <Route path="sculpting" element={<Sculpting />} />
+            <Route path="pencils" element={<Pencils />} />
+            <Route path="framing" element={<Framing />} />
+            <Route path="printmaking" element={<PrintMaking />} />
+            <Route path="fabric" element={<Fabric />} />
           </Route>
         </Routes>
       </CartContext.Provider>

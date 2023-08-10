@@ -32,8 +32,8 @@ app.get('/api/hello', (req, res) => {
 app.get('/api/products/', async (req, res, next) => {
   try {
     const sql = `
-    select *
-    from "products"
+      select *
+      from "products"
     `;
 
     const result = await db.query(sql);
@@ -51,15 +51,16 @@ app.get('/api/products/:productId', async (req, res, next) => {
       throw new ClientError(400, 'productId must be a positive integer.');
     }
     const sql = `
-    select *
-    from "products"
-    where "productId" = $1
+      select *
+      from "products"
+      where "productId" = $1
     `;
 
     const params = [productId];
     const result = await db.query(sql, params);
     res.json(result.rows[0]);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 });
@@ -68,10 +69,10 @@ app.post('/api/cart/addtocart', async (req, res, next) => {
   try {
     const { productId, qty, cartId } = req.body;
     const sql = `
-    insert
-    into "cartItems" ("productId", "qty", "cartId")
-    values ($1, $2, $3)
-    returning *
+      insert
+      into "cartItems" ("productId", "qty", "cartId")
+      values ($1, $2, $3)
+      returning *
     `;
 
     const params = [productId, qty, cartId];

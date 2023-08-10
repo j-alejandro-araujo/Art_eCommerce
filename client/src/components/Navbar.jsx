@@ -52,7 +52,7 @@ const Navbar = () => {
           <Link to="/cart" className="hover:text-[#EE2D25] mr-3">
             <FontAwesomeIcon icon={faCartShopping} />
             {cart.length > 0 && (
-              <span className="cart-badge">{cart.length}</span>
+              <span className="cart-badge text-red-600">{cart.length}</span>
             )}
           </Link>
         </div>
@@ -64,37 +64,48 @@ const Navbar = () => {
           <div className="z-50">
             <NavDrawer />
           </div>
-          {/* Turn this into an UL w/ Li */}
           <Link to="/products">
             <p className="cursor-pointer relative group whitespace-nowrap text-lg">
               ALL
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
-          <p className="cursor-pointer relative group whitespace-nowrap text-lg">
-            Paint
-            <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </p>
-          <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
-            Canvas
-            <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </p>
-          <p className=" cursor-pointer relative group whitespace-nowrap text-lg">
-            Brushes
-            <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </p>
-          <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
-            Drawing
-            <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </p>
-          <p className="cursor-pointer relative group whitespace-nowrap text-lg">
-            Sculpting
-            <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </p>
-          <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
-            Pencils
-            <span className="cursor-pointer absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </p>
+          <Link to="/paint">
+            <p className="cursor-pointer relative group whitespace-nowrap text-lg">
+              Paint
+              <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </p>
+          </Link>
+          <Link to="/canvas">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+              Canvas
+              <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </p>
+          </Link>
+          <Link to="/brushes">
+            <p className=" cursor-pointer relative group whitespace-nowrap text-lg">
+              Brushes
+              <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </p>
+          </Link>
+          <Link to="/drawing">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+              Drawing
+              <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </p>
+          </Link>
+          <Link to="/sculpting">
+            <p className="cursor-pointer relative group whitespace-nowrap text-lg">
+              Sculpting
+              <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </p>
+          </Link>
+          <Link to="/pencils">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+              Pencils
+              <span className="cursor-pointer absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </p>
+          </Link>
         </div>
         <Outlet />
       </div>

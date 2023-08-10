@@ -24,7 +24,9 @@ const Catalog = () => {
 
   return (
     <div className="catalog-container">
-      <h2 className="catalog-h2">Product Catalog</h2>
+      <h2 className="catalog-h2 flex justify-center uppercase text-4xl font-medium pt-5 pb-5 bg-[#EE2D25] mt-10 mb-10 text-white">
+        Product Catalog
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 justify-center">
         {products.map((product) => (
           <Link
@@ -39,7 +41,7 @@ const Catalog = () => {
                   alt={product.name}
                 />
                 <div className="product-info p-2">
-                  <h3 className="font-bold mb-2 line-clamp-2">
+                  <h3 className="font-bold mb-2 line-clamp-1">
                     {product.name}
                   </h3>
                   <span className="badge bg-light pt-2 text-dark">

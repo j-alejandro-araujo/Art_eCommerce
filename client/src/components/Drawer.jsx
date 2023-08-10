@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export function NavDrawer() {
   const [open, setOpen] = useState(false);
@@ -47,42 +48,60 @@ export function NavDrawer() {
                   </div>
                   <hr className="my-4 border-t border-gray-400" />
                   <ul className="mb-4 space-y-5">
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      PAINT
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      CANVAS
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      BRUSHES
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      DRAWING
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      SCULPTING
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      PENCILS
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      FRAMING
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      PRINTMAKING
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
-                    <li className="cursor-pointer sm:block relative group whitespace-nowrap">
-                      FABRIC
-                      <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </li>
+                    <Link to="/paint">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap">
+                        PAINT
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/canvas">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        CANVAS
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/brushes">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        BRUSHES
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/drawing">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        DRAWING
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/sculpting">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        SCULPTING
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/pencils">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        PENCILS
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/framing">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        FRAMING
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/printmaking">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        PRINTMAKING
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
+                    <Link to="/fabric">
+                      <li className="cursor-pointer sm:block relative group whitespace-nowrap pt-5">
+                        FABRIC
+                        <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </div>

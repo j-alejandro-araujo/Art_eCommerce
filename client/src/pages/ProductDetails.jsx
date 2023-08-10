@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { fetchProduct, addToCart, updateCart } from '../lib/api';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import CartContext from '../components/CartContext';
 import GlobalContext from '../components/GlobalContext';
 
@@ -55,14 +55,14 @@ const ProductDetails = () => {
       const existingCartItem = cart.find(
         (item) => item.productId === productId
       );
-
       if (existingCartItem) {
         const updatedCart = cart.map((item) =>
           item.productId === productId ? { ...item, qty: item.qty + qty } : item
         );
         console.log('Updated cart:', updatedCart);
         setCart(updatedCart);
-        await updateCart(); // Need to call updateCart function for server and client side qty to match
+        const updatedQty = Number(existingCartItem.qty) + qty;
+        await updateCart(cartId, productId, updatedQty);
       } else {
         console.log('Adding new item to cart...');
         const addedProduct = await addToCart(productId, qty, cartId);
