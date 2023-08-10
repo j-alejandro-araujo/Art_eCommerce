@@ -61,19 +61,19 @@ const Navbar = () => {
       </div>
 
       <div>
-        <div className="bg-white shadow-md max-w-[1640px] mx-auto flex justify-between items-center p-4 pb-8">
+        <div className="bg-white shadow-md max-w-[1640px] mx-auto flex justify-between items-center p-4 pb-8 px-10">
           {/* Bottom Side */}
           <div className="z-50">
             <NavDrawer />
           </div>
           <Link to="/products">
-            <p className="cursor-pointer relative group whitespace-nowrap text-lg">
-              ALL
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+              All
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
           <Link to="/paint">
-            <p className="cursor-pointer relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
               Paint
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
@@ -85,7 +85,7 @@ const Navbar = () => {
             </p>
           </Link>
           <Link to="/brushes">
-            <p className=" cursor-pointer relative group whitespace-nowrap text-lg">
+            <p className=" cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
               Brushes
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
@@ -97,7 +97,7 @@ const Navbar = () => {
             </p>
           </Link>
           <Link to="/sculpting">
-            <p className="cursor-pointer relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
               Sculpting
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
