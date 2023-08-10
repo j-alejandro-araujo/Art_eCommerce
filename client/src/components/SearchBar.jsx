@@ -10,34 +10,10 @@ const SearchBar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSearchResultsVisible, setSearchResultsVisible] = useState(false);
 
   const inputRef = useRef();
   const resultsRef = useRef();
-
-  const handleSearch = (e) => {
-    const term = e.target.value;
-    setSearchTerm(term);
-
-    const filteredResults = products.filter((product) =>
-      product.name.toLowerCase().includes(term.toLowerCase())
-    );
-
-    setSearchResults(filteredResults);
-  };
-
-  const handleResultClick = (productId) => {
-    navigate(`/details/${productId}`);
-    resultsRef.current && (resultsRef.current.style.display = 'none');
-  };
-
-  const handleOutsideClick = (e) => {
-    if (
-      !inputRef.current?.contains(e.target) &&
-      !resultsRef.current?.contains(e.target)
-    ) {
-      resultsRef.current && (resultsRef.current.style.display = 'none');
-    }
-  };
 
   useEffect(() => {
     async function fetchProducts() {
@@ -50,7 +26,36 @@ const SearchBar = () => {
       }
     }
     fetchProducts();
+  }, []);
 
+  const handleSearch = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    const filteredResults = products.filter((product) =>
+      product.name.toLowerCase().includes(term.toLowerCase())
+    );
+
+    setSearchResults(filteredResults);
+
+    setSearchResultsVisible(term.length > 0 && filteredResults.length > 0);
+  };
+
+  const handleResultClick = (productId) => {
+    navigate(`/details/${productId}`);
+    setSearchResultsVisible(false);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (
+      !inputRef.current?.contains(e.target) &&
+      !resultsRef.current?.contains(e.target)
+    ) {
+      setSearchResultsVisible(false);
+    }
+  };
+
+  useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
@@ -69,11 +74,8 @@ const SearchBar = () => {
         placeholder="Search..."
         value={searchTerm}
         onChange={handleSearch}
-        onClick={() =>
-          resultsRef.current && (resultsRef.current.style.display = 'block')
-        }
       />
-      {searchResults.length > 0 && (
+      {isSearchResultsVisible && (
         <div
           ref={resultsRef}
           className="search-results absolute left-5 right-5 top-8 mt-2 p-2 bg-white border border-gray-300 shadow z-10">
