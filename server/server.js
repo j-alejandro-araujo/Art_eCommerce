@@ -3,6 +3,8 @@ import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
 import ClientError from './lib/client-error.js';
 import pg from 'pg';
+import argon2 from 'argon2';
+import jwt from 'jsonwebtoken';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -30,8 +32,8 @@ app.get('/api/hello', (req, res) => {
 app.get('/api/products/', async (req, res, next) => {
   try {
     const sql = `
-    select *
-    from "products"
+      select *
+      from "products"
     `;
 
     const result = await db.query(sql);
@@ -49,14 +51,151 @@ app.get('/api/products/:productId', async (req, res, next) => {
       throw new ClientError(400, 'productId must be a positive integer.');
     }
     const sql = `
-    select *
-    from "products"
-    where "productId" = $1
+      select *
+      from "products"
+      where "productId" = $1
     `;
 
     const params = [productId];
     const result = await db.query(sql, params);
     res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+app.post('/api/cart/addtocart', async (req, res, next) => {
+  try {
+    const { productId, qty, cartId } = req.body;
+    const sql = `
+      insert
+      into "cartItems" ("productId", "qty", "cartId")
+      values ($1, $2, $3)
+      returning *
+    `;
+
+    const params = [productId, qty, cartId];
+    const result = await db.query(sql, params);
+    const [cart] = result.rows;
+    res.status(201).json(cart);
+  } catch (err) {
+    console.error(err); // logging error to troubleshoot
+    next(err);
+  }
+});
+
+app.delete('/api/cart/removeitem', async (req, res, next) => {
+  try {
+    const { productId, cartId } = req.body;
+    const sql = `
+        delete
+        from "cartItems"
+        where "productId" = $1
+        and "cartId" = $2
+    `;
+    const params = [productId, cartId];
+    await db.query(sql, params);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.put('/api/cart/update', async (req, res, next) => {
+  try {
+    const { productId, cartId, qty } = req.body;
+    const sql = `
+      update "cartItems"
+         set "qty" = $3
+       where "productId" = $1
+         and "cartId" = $2
+    `;
+    const params = [productId, cartId, qty];
+    await db.query(sql, params);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/cart/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const sql = `
+      select *
+        from "products"
+        join "cartItems" using ("productId")
+        join "cart" using ("cartId")
+        join "user" using ("userId")
+       where "user"."userId" = $1
+    `;
+    const params = [userId];
+    const result = await db.query(sql, params);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/auth/sign-up', async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+      throw new ClientError(400, 'username, email, and password are required.');
+    }
+    const hashedPassword = await argon2.hash(password);
+    const sql = `
+      insert into "user" ("username", "hashedPassword", "email")
+      values ($1, $2, $3)
+      returning *
+    `;
+    const params = [username, hashedPassword, email];
+    const result = await db.query(sql, params);
+    const [user] = result.rows;
+    const cartSql = `
+      insert into "cart" ("userId")
+      values ($1)
+      returning *
+    `;
+    const cartParams = [user.userId];
+    await db.query(cartSql, cartParams);
+    res.status(201).json(user);
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+app.post('/api/auth/sign-in', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new ClientError(401, 'invalid login');
+    }
+    const sql = `
+      select "userId",
+             "hashedPassword",
+             "cartId"
+        from "user"
+        join "cart" using ("userId")
+       where "username" = $1
+    `;
+    const params = [username];
+    const result = await db.query(sql, params);
+    const [user] = result.rows;
+    if (!user) {
+      throw new ClientError(401, 'invalid login');
+    }
+
+    const { userId, hashedPassword, cartId } = user;
+
+    if (!(await argon2.verify(hashedPassword, password))) {
+      throw new ClientError(401, 'invalid login');
+    }
+    const payload = { userId, username, cartId };
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+    res.json({ token, user: payload });
   } catch (err) {
     next(err);
   }

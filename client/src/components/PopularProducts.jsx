@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchAllProducts } from '../lib/api';
 import { Link } from 'react-router-dom';
 
-const Catalog = () => {
+const PopularProducts = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,12 +23,12 @@ const Catalog = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="catalog-container">
-      <h2 className="catalog-h2 flex justify-center uppercase text-4xl font-medium pt-5 pb-5 bg-[#EE2D25] mt-10 mb-10 text-white">
-        Product Catalog
+    <div className="popular-products-container">
+      <h2 className="text-2xl font-semibold mb-8 mt-6 flex justify-center">
+        Browse Popular Products
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 justify-center">
-        {products.map((product) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 p-4 justify-center">
+        {products.slice(0, 8).map((product) => (
           <Link
             key={product.productId}
             to={`/details/${product.productId}`}
@@ -57,4 +57,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default PopularProducts;

@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { fetchAllProducts } from '../lib/api';
 import { Link } from 'react-router-dom';
+import { fetchAllProducts } from '../lib/api';
 
-const Catalog = () => {
+const ProductTypePage = ({ productType }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
 
   useEffect(() => {
     async function fetchProducts() {
       try {
         const data = await fetchAllProducts();
-        console.log('Fetched products:', data);
-        setProducts(data);
+        const filteredProducts = data.filter(
+          (product) => product.type === productType
+        );
+        setProducts(filteredProducts);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
+        setError(error);
       }
     }
     fetchProducts();
-  }, []);
+  }, [productType]);
 
   if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error Loading Products: {error.message}</div>;
 
   return (
     <div className="catalog-container">
-      <h2 className="catalog-h2 flex justify-center uppercase text-4xl font-medium pt-5 pb-5 bg-[#EE2D25] mt-10 mb-10 text-white">
-        Product Catalog
+      <h2 className="catalog-h2 flex justify-center uppercase text-4xl font-medium pt-5 pb-5 bg-[#FDB000] mt-10 mb-10">
+        {productType} Products
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 justify-center">
         {products.map((product) => (
@@ -57,4 +62,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default ProductTypePage;
