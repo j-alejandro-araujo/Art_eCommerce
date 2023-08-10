@@ -35,13 +35,15 @@ const Navbar = () => {
             {user && (
               <div
                 onClick={handleSignout}
-                className="relative group whitespace-nowrap">
+                className="relative group whitespace-nowrap text-lg">
                 Sign out
                 <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </div>
             )}
             {!user && (
-              <Link to="/sign-in" className="relative group whitespace-nowrap">
+              <Link
+                to="/sign-in"
+                className="relative group whitespace-nowrap text-lg">
                 Sign in
                 <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </Link>
