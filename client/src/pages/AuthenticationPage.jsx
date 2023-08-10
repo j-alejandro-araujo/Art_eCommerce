@@ -8,7 +8,7 @@ export default function AuthenticationPage({ action }) {
   const { user, handleSignin } = useContext(GlobalContext);
 
   useEffect(() => {
-    if (user) navigate('/products');
+    if (user) navigate(-1);
   }, [user, navigate]);
 
   const greeting = action === 'sign-in' ? 'Sign in' : 'Register';

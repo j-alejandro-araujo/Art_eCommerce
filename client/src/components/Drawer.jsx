@@ -13,7 +13,7 @@ export function NavDrawer() {
     <>
       <button
         onClick={openDrawer}
-        className="cursor-pointer flex justify-center">
+        className="cursor-pointer flex justify-center hover:text-[#EE2D25]">
         <FontAwesomeIcon icon={faBars} />
       </button>
       <div

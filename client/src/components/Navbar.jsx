@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Link, Outlet } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
 import CartContext from './CartContext';
@@ -31,7 +31,7 @@ const Navbar = () => {
             {user && (
               <div
                 onClick={handleSignout}
-                className="relative group whitespace-nowrap text-lg">
+                className="relative group whitespace-nowrap text-lg hover:text-blue-600">
                 Sign out
                 <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </div>
@@ -39,7 +39,7 @@ const Navbar = () => {
             {!user && (
               <Link
                 to="/sign-in"
-                className="relative group whitespace-nowrap text-lg">
+                className="relative group whitespace-nowrap text-lg hover:text-blue-600">
                 Sign in
                 <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </Link>
@@ -63,43 +63,43 @@ const Navbar = () => {
             <NavDrawer />
           </div>
           <Link to="/products">
-            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg hover:text-[#EE2D25]">
               All
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
           <Link to="/paint">
-            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg hover:text-[#EE2D25]">
               Paint
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
           <Link to="/canvas">
-            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg hover:text-[#EE2D25]">
               Canvas
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
           <Link to="/brushes">
-            <p className=" cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+            <p className=" cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg hover:text-[#EE2D25]">
               Brushes
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
           <Link to="/drawing">
-            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg hover:text-[#EE2D25]">
               Drawing
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
           <Link to="/sculpting">
-            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg hover:text-[#EE2D25]">
               Sculpting
               <span className="absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>
           </Link>
           <Link to="/pencils">
-            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg">
+            <p className="cursor-pointer hidden sm:block relative group whitespace-nowrap text-lg hover:text-[#EE2D25]">
               Pencils
               <span className="cursor-pointer absolute inset-x-0 bottom-[-5px] h-0.5 bg-black transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </p>

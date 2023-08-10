@@ -56,12 +56,12 @@ const ProductDetails = () => {
         (item) => item.productId === productId
       );
       if (existingCartItem) {
+        const updatedQty = Number(existingCartItem.qty) + qty;
         const updatedCart = cart.map((item) =>
-          item.productId === productId ? { ...item, qty: item.qty + qty } : item
+          item.productId === productId ? { ...item, qty: updatedQty } : item
         );
         console.log('Updated cart:', updatedCart);
         setCart(updatedCart);
-        const updatedQty = Number(existingCartItem.qty) + qty;
         await updateCart(cartId, productId, updatedQty);
       } else {
         console.log('Adding new item to cart...');
