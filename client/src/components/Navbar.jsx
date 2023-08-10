@@ -6,6 +6,7 @@ import GlobalContext from './GlobalContext';
 import CartContext from './CartContext';
 import { NavDrawer } from './Drawer';
 import logo from '../logo.png';
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
   const { user, handleSignout } = useContext(GlobalContext);
@@ -23,12 +24,7 @@ const Navbar = () => {
         </Link>
         {/* Search Input */}
         <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[300px] m:w-[400px] lg:w-[600px]">
-          <FontAwesomeIcon icon={faSearch} />
-          <input
-            className="bg-transparent p-2 w-full focus:outline-none"
-            type="search"
-            placeholder="Search..."
-          />
+          <SearchBar />
         </div>
         <div className="flex items-center cursor-pointer">
           <div>

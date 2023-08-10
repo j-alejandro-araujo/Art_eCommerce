@@ -49,15 +49,15 @@ const Card = ({ title, subtitle, icon, to }) => {
     <Link
       to={to}
       className="w-full p-4 rounded border-[1px] border-slate-200 relative overflow-hidden group bg-white">
-      <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-[#2BA3C6] translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-[#2BA3C6] translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 z-5" />
       <FontAwesomeIcon
         icon={icon}
-        className="mb-2 text-2xl text-blue-600 group-hover:text-white transition-colors relative z-10 duration-300"
+        className="mb-2 text-2xl text-blue-600 group-hover:text-white transition-colors relative z-5 duration-300"
       />
-      <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300">
+      <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-5 duration-300">
         {title}
       </h3>
-      <p className="text-gray-400 group-hover:text-gray-100 relative z-10 duration-300">
+      <p className="text-gray-400 group-hover:text-gray-100 relative z-5 duration-300">
         {subtitle}
       </p>
     </Link>
