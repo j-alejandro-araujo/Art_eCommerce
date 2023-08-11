@@ -61,7 +61,7 @@ const Navbar = () => {
       </div>
 
       <div>
-        <div className="bg-white shadow-md max-w-[1640px] mx-auto flex justify-between items-center p-4 pb-8 px-10">
+        <div className="bg-white shadow-md mx-auto flex justify-between items-center p-4 pb-8 px-10">
           {/* Bottom Side */}
           <div className="z-50">
             <NavDrawer />
