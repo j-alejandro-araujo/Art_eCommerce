@@ -32,7 +32,6 @@ export async function updateCart(cartId, productId, updatedQty) {
   };
   const res = await fetch('/api/cart/update', req);
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
-  // return await res.json();
 }
 
 export async function fetchCart(userId) {
