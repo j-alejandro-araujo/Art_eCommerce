@@ -38,7 +38,7 @@ export default function AuthForm({ action, onSignIn }) {
             autoFocus
             type="text"
             name="username"
-            className="form-input"
+            className="form-input ml-2"
           />
         </label>
       </div>
@@ -46,7 +46,12 @@ export default function AuthForm({ action, onSignIn }) {
         <div className="mb-3">
           <label className="form-label">
             Email:
-            <input required type="email" name="email" className="form-input" />
+            <input
+              required
+              type="email"
+              name="email"
+              className="form-input ml-2"
+            />
           </label>
         </div>
       )}
@@ -57,7 +62,7 @@ export default function AuthForm({ action, onSignIn }) {
             required
             type="password"
             name="password"
-            className="form-input"
+            className="form-input ml-2"
           />
         </label>
       </div>

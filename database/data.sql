@@ -41,3 +41,13 @@ insert into "products"
     ('Watermelon Cotton Fabric by Loops & Threads', '1.99', 'Lend a summery touch to your DIY art and craft projects with this multi-purpose fabric. You can use it to create anything from mason jar covers to napkin rings. Pre-cut fabric can be used for hairbands, trims, pockets, and more.', 'https://imgs.michaels.com/MAM/assets/1/5E3C12034D34434F8A9BAAFDDF0F8E1B/img/0F7279A5B1D0453CAC5EC5D1D15AF7CF/10631293_1.jpg?fit=inside|1280:1280', 'fabric'),
     ('Sharpie® The Ultimate Collection Permanent Marker Set', '59.99', 'Create visuals and drawings brimming with vibrant color and depth, using these permanent markers from Sharpie. The fine and ultra fine tip markers are great to create stunning, intricate details on your artwork and lettering projects.', 'https://imgs.michaels.com/MAM/assets/1/5E3C12034D34434F8A9BAAFDDF0F8E1B/img/50C3A45A9D064392B6B95F7836903C5B/10603255_1.jpg?fit=inside|1280:1280', 'markers'),
     ('Uni Posca PC-1M 8 Color Extra-Fine Tapered Tip Paint Marker Set', '29.99', 'Non-toxic, water-based POSCA paint markers can be used on almost any surface, and are loved by professionals, creative hobbyists and amateurs alike. The alcohol and solvent-free opaque paint covers well, is blendable, dries quickly and can be overlaid when dry. This set includes white, yellow, green, light blue, pink, red, black and blue.', 'https://imgs.michaels.com/MAM/assets/1/5E3C12034D34434F8A9BAAFDDF0F8E1B/img/4D923F760B414986BA7F97D9931A4233/10670565_31.jpg?fit=inside|1280:1280', 'markers');
+
+INSERT INTO "user"
+  ("userId", "username", "hashedPassword", "email")
+  VALUES
+    (1, 'guestlogin', 'guestlogin', 'guest@email.com');
+
+insert into "cart"
+  ("cartId", "userId")
+  values
+    (1, 1);
