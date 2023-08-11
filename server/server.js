@@ -80,7 +80,7 @@ app.post('/api/cart/addtocart', async (req, res, next) => {
     const [cart] = result.rows;
     res.status(201).json(cart);
   } catch (err) {
-    console.error(err); // logging error to troubleshoot
+    console.error(err);
     next(err);
   }
 });
