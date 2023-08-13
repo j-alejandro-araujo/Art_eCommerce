@@ -30,7 +30,7 @@ export function useAuth() {
     localStorage.removeItem(tokenKey);
     setUser(undefined);
     setToken(undefined);
-    navigate('/products');
+    navigate(-1);
   }
 
   return { user, token, isAuthorizing, handleSignin, handleSignout };

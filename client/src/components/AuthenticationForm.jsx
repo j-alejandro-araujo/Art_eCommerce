@@ -24,6 +24,21 @@ export default function AuthForm({ action, onSignIn }) {
     }
   }
 
+  const showGuestButton = action === 'sign-in';
+
+  function handleGuestLogin() {
+    const autofillUsername = 'guest';
+    const autofillPassword = 'guest';
+
+    const usernameInput = document.querySelector('input[name="username"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+
+    if (usernameInput && passwordInput) {
+      usernameInput.value = autofillUsername;
+      passwordInput.value = autofillPassword;
+    }
+  }
+
   const altRoute = action === 'sign-up' ? '/sign-in' : '/sign-up';
   const altActionMessage = action === 'sign-up' ? 'Sign in' : 'Register here!';
   const actionBtnText = action === 'sign-up' ? 'Register' : 'Log In';
@@ -72,6 +87,14 @@ export default function AuthForm({ action, onSignIn }) {
             {altActionMessage}
           </Link>
         </small>
+        {showGuestButton && (
+          <button
+            type="button"
+            onClick={handleGuestLogin}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">
+            Continue as guest
+          </button>
+        )}
         <button
           type="submit"
           className="bg-[#2BA3C6] hover:bg-[#1b81a0] text-white font-bold py-2 px-4 rounded">
