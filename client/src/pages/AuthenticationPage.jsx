@@ -17,7 +17,7 @@ export default function AuthenticationPage({ action }) {
 
   return (
     <div
-      className="flex justify-center items-center h-screen bg-cover bg-center"
+      className="flex justify-center items-center h-screen bg-cover bg-center -mb-10"
       style={{ backgroundImage }}>
       <div className="max-w-md w-full p-4 bg-white rounded-lg shadow">
         <h2 className="text-3xl font-bold text-center mb-6">{greeting}</h2>

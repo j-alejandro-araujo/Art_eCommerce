@@ -20,6 +20,7 @@ import Framing from './pages/Framing';
 import PrintMaking from './pages/PrintMaking';
 import Fabric from './pages/Fabric';
 import PageNotFound from './pages/PageNotFound';
+import Footer from './components/Footer';
 
 function App() {
   const { user, token, isAuthorizing, handleSignin, handleSignout } = useAuth();
@@ -53,32 +54,36 @@ function App() {
   return (
     <GlobalContext.Provider value={globalContextValue}>
       <CartContext.Provider value={cartContextValue}>
-        <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route index element={<Home />} />
-            <Route path="products" element={<Catalog />} />
-            <Route path="details/:productId" element={<ProductDetails />} />
-            <Route
-              path="sign-in"
-              element={<AuthenticationPage action="sign-in" />}
-            />
-            <Route
-              path="sign-up"
-              element={<AuthenticationPage action="sign-up" />}
-            />
-            <Route path="cart" element={<Cart />} />
-            <Route path="paint" element={<Paint />} />
-            <Route path="canvas" element={<Canvas />} />
-            <Route path="brushes" element={<Brushes />} />
-            <Route path="drawing" element={<Drawing />} />
-            <Route path="sculpting" element={<Sculpting />} />
-            <Route path="pencils" element={<Pencils />} />
-            <Route path="framing" element={<Framing />} />
-            <Route path="printmaking" element={<PrintMaking />} />
-            <Route path="fabric" element={<Fabric />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-        </Routes>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="products" element={<Catalog />} />
+              <Route path="details/:productId" element={<ProductDetails />} />
+              <Route
+                path="sign-in"
+                element={<AuthenticationPage action="sign-in" />}
+              />
+              <Route
+                path="sign-up"
+                element={<AuthenticationPage action="sign-up" />}
+              />
+              <Route path="cart" element={<Cart />} />
+              <Route path="paint" element={<Paint />} />
+              <Route path="canvas" element={<Canvas />} />
+              <Route path="brushes" element={<Brushes />} />
+              <Route path="drawing" element={<Drawing />} />
+              <Route path="sculpting" element={<Sculpting />} />
+              <Route path="pencils" element={<Pencils />} />
+              <Route path="framing" element={<Framing />} />
+              <Route path="printmaking" element={<PrintMaking />} />
+              <Route path="fabric" element={<Fabric />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </CartContext.Provider>
     </GlobalContext.Provider>
   );
