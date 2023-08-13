@@ -4,7 +4,7 @@ import AuthenticationForm from '../components/AuthenticationForm';
 import GlobalContext from '../components/GlobalContext';
 import backgroundImageUrl from '../luchadorx2.png';
 
-export default function AuthenticationPage({ action }) {
+const AuthenticationPage = ({ action }) => {
   const navigate = useNavigate();
   const { user, handleSignin } = useContext(GlobalContext);
 
@@ -31,4 +31,6 @@ export default function AuthenticationPage({ action }) {
       </div>
     </div>
   );
-}
+};
+
+export default AuthenticationPage;

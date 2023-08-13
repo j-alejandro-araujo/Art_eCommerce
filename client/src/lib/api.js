@@ -44,17 +44,17 @@ export async function signIn(username, password) {
   return authenticate('sign-in', username, password);
 }
 
-export async function signUp(username, email, password) {
-  return authenticate('sign-up', username, email, password);
+export async function signUp(username, password) {
+  return authenticate('sign-up', username, password);
 }
 
-export async function authenticate(action, username, email, password) {
+export async function authenticate(action, username, password) {
   const req = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ username, email, password }),
+    body: JSON.stringify({ username, password }),
   };
 
   try {

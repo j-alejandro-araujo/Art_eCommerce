@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authenticate } from '../lib/api';
 
-export default function AuthForm({ action, onSignIn }) {
+const AuthenticationForm = ({ action, onSignIn }) => {
   const navigate = useNavigate();
   const [error, setError] = useState();
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const { username, email, password } = Object.fromEntries(
-      formData.entries()
-    );
+    const { username, password } = Object.fromEntries(formData.entries());
     try {
-      const result = await authenticate(action, username, email, password);
+      const result = await authenticate(action, username, password);
       if (action === 'sign-up') {
         navigate('/sign-in');
       } else if (result.user && result.token) {
@@ -22,11 +20,11 @@ export default function AuthForm({ action, onSignIn }) {
     } catch (err) {
       setError(err);
     }
-  }
+  };
 
   const showGuestButton = action === 'sign-in';
 
-  function handleGuestLogin() {
+  const handleGuestLogin = () => {
     const autofillUsername = 'guest';
     const autofillPassword = 'guest';
 
@@ -37,7 +35,7 @@ export default function AuthForm({ action, onSignIn }) {
       usernameInput.value = autofillUsername;
       passwordInput.value = autofillPassword;
     }
-  }
+  };
 
   const altRoute = action === 'sign-up' ? '/sign-in' : '/sign-up';
   const altActionMessage = action === 'sign-up' ? 'Sign in' : 'Register here!';
@@ -57,19 +55,6 @@ export default function AuthForm({ action, onSignIn }) {
           />
         </label>
       </div>
-      {action === 'sign-up' && (
-        <div className="mb-3">
-          <label className="form-label">
-            Email:
-            <input
-              required
-              type="email"
-              name="email"
-              className="form-input ml-2"
-            />
-          </label>
-        </div>
-      )}
       <div className="mb-3">
         <label className="form-label">
           Password:
@@ -104,4 +89,6 @@ export default function AuthForm({ action, onSignIn }) {
       {error && <div className="text-red-500 mt-2">Error: {error.message}</div>}
     </form>
   );
-}
+};
+
+export default AuthenticationForm;

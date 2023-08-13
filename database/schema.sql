@@ -26,7 +26,6 @@ CREATE TABLE "public"."user" (
 	"userId" serial NOT NULL,
 	"username" TEXT NOT NULL,
 	"hashedPassword" TEXT NOT NULL,
-	"email" TEXT NOT NULL,
 	CONSTRAINT "user_pk" PRIMARY KEY ("userId")
 ) WITH (
   OIDS=FALSE

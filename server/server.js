@@ -140,17 +140,17 @@ app.get('/api/cart/:userId', async (req, res, next) => {
 
 app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
-    if (!username || !email || !password) {
-      throw new ClientError(400, 'username, email, and password are required.');
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new ClientError(400, 'username and password are required.');
     }
     const hashedPassword = await argon2.hash(password);
     const sql = `
-      insert into "user" ("username", "hashedPassword", "email")
-      values ($1, $2, $3)
+      insert into "user" ("username", "hashedPassword")
+      values ($1, $2)
       returning *
     `;
-    const params = [username, hashedPassword, email];
+    const params = [username, hashedPassword];
     const result = await db.query(sql, params);
     const [user] = result.rows;
     const cartSql = `
