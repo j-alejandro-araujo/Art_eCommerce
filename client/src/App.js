@@ -19,6 +19,7 @@ import Pencils from './pages/Pencils';
 import Framing from './pages/Framing';
 import PrintMaking from './pages/PrintMaking';
 import Fabric from './pages/Fabric';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   const { user, token, isAuthorizing, handleSignin, handleSignout } = useAuth();
@@ -75,6 +76,7 @@ function App() {
             <Route path="framing" element={<Framing />} />
             <Route path="printmaking" element={<PrintMaking />} />
             <Route path="fabric" element={<Fabric />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </CartContext.Provider>
