@@ -17,10 +17,10 @@ const ParticleHero = () => {
         <pointLight position={[-30, 0, -30]} power={10.0} />
         <PointCircle />
       </Canvas>
-      <h2 className="absolute top-[5%] right-[2%] text-white font-medium text-2xl md:text-8xl pointer-events-none">
+      <h2 className="absolute top-[5%] right-[2%] text-white font-medium text-6xl md:text-8xl pointer-events-none">
         You create,
       </h2>
-      <h2 className="absolute top-[35%] right-[2%] text-white font-medium text-2xl md:text-8xl pointer-events-none">
+      <h2 className="absolute top-[35%] right-[2%] text-white font-medium text-6xl md:text-8xl pointer-events-none">
         we supply.
       </h2>
       <p className="absolute bottom-[2%] right-[1%] text-gray-300 text-2xl md:text-lg sm:text-xs pointer-events-none">
