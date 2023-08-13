@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAllProducts } from '../lib/api';
+import Loader from '../components/Loader';
 
 const ProductTypePage = ({ productType }) => {
   const [products, setProducts] = useState([]);
@@ -24,7 +25,7 @@ const ProductTypePage = ({ productType }) => {
     fetchProducts();
   }, [productType]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error Loading Products: {error.message}</div>;
 
   return (

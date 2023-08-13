@@ -3,6 +3,7 @@ import { fetchProduct, addToCart, updateCart } from '../lib/api';
 import { useParams, useNavigate } from 'react-router-dom';
 import CartContext from '../components/CartContext';
 import GlobalContext from '../components/GlobalContext';
+import Loader from '../components/Loader';
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const ProductDetails = () => {
 
   console.log('Cart:', cart);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) {
     return (
       <div>

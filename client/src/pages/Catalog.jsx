@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAllProducts } from '../lib/api';
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,7 @@ const Catalog = () => {
     fetchProducts();
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="catalog-container">
