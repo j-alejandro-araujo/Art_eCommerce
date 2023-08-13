@@ -36,9 +36,11 @@ export function NavDrawer() {
               <div className="flex-1 h-0 overflow-y-auto">
                 <div className="p-6">
                   <div className="mb-6 flex items-center justify-between py-2 px-4 p-0">
-                    <h2 className="text-3xl font-bold cursor-pointer hover:text-[#2BA3C6]">
-                      Hello, sign in
-                    </h2>
+                    <Link to="/sign-in" onClick={closeDrawer}>
+                      <h2 className="text-3xl font-bold cursor-pointer hover:text-[#2BA3C6]">
+                        Hello, sign in
+                      </h2>
+                    </Link>
                     <button className="text-blue-gray" onClick={closeDrawer}>
                       <FontAwesomeIcon
                         icon={faXmark}
