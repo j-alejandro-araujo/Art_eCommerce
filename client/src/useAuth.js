@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signUp } from './lib/api';
 
 const tokenKey = 'react-context-jwt';
 
@@ -10,7 +11,7 @@ export function useAuth() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const auth = localStorage.getItem(tokenKey);
+    const auth = sessionStorage.getItem(tokenKey);
     if (auth) {
       const { user, token } = JSON.parse(auth);
       setUser(user);
@@ -19,19 +20,36 @@ export function useAuth() {
     setIsAuthorizing(false);
   }, []);
 
-  function handleSignin(auth) {
-    localStorage.setItem(tokenKey, JSON.stringify(auth));
+  async function handleSignup(username, password) {
+    try {
+      const auth = await signUp(username, password);
+      handleSignin(auth);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleSignin(auth) {
+    sessionStorage.setItem(tokenKey, JSON.stringify(auth));
     const { user, token } = auth;
     setUser(user);
     setToken(token);
-  }
-
-  function handleSignout() {
-    localStorage.removeItem(tokenKey);
-    setUser(undefined);
-    setToken(undefined);
     navigate(-1);
   }
 
-  return { user, token, isAuthorizing, handleSignin, handleSignout };
+  function handleSignout() {
+    sessionStorage.removeItem(tokenKey);
+    setUser(undefined);
+    setToken(undefined);
+    navigate('/');
+  }
+
+  return {
+    user,
+    token,
+    isAuthorizing,
+    handleSignup,
+    handleSignin,
+    handleSignout,
+  };
 }

@@ -5,6 +5,10 @@ import { authenticate } from '../lib/api';
 const AuthenticationForm = ({ action, onSignIn }) => {
   const navigate = useNavigate();
   const [error, setError] = useState();
+  const [autofillValues, setAutofillValues] = useState({
+    username: '',
+    password: '',
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,15 +29,13 @@ const AuthenticationForm = ({ action, onSignIn }) => {
   const showGuestButton = action === 'sign-in';
 
   const handleGuestLogin = () => {
-    const autofillUsername = 'guest';
-    const autofillPassword = 'guest';
-
-    const usernameInput = document.querySelector('input[name="username"]');
-    const passwordInput = document.querySelector('input[name="password"]');
-
-    if (usernameInput && passwordInput) {
-      usernameInput.value = autofillUsername;
-      passwordInput.value = autofillPassword;
+    if (showGuestButton) {
+      const autofillUsername = 'guest';
+      const autofillPassword = 'guest';
+      setAutofillValues({
+        username: autofillUsername,
+        password: autofillPassword,
+      });
     }
   };
 
@@ -52,6 +54,7 @@ const AuthenticationForm = ({ action, onSignIn }) => {
             type="text"
             name="username"
             className="form-input ml-2"
+            defaultValue={autofillValues.username}
           />
         </label>
       </div>
@@ -63,6 +66,7 @@ const AuthenticationForm = ({ action, onSignIn }) => {
             type="password"
             name="password"
             className="form-input ml-2"
+            defaultValue={autofillValues.password}
           />
         </label>
       </div>
