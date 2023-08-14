@@ -22,10 +22,12 @@ export function useAuth() {
 
   async function handleSignup(username, password) {
     try {
+      console.log('Calling signUp API...');
       const auth = await signUp(username, password);
+      console.log('Sign-up successful:', auth);
       handleSignin(auth);
     } catch (error) {
-      console.error(error);
+      console.error('Sign-up error:', error);
     }
   }
 
