@@ -58,10 +58,7 @@ export async function authenticate(action, username, password) {
   };
 
   try {
-    console.log('Sending request to:', `/api/auth/${action}`);
     const res = await fetch(`/api/auth/${action}`, req);
-
-    console.log('Response status:', res.status);
 
     if (!res.ok) {
       console.error('Error response:', res);
@@ -69,7 +66,6 @@ export async function authenticate(action, username, password) {
     }
 
     const data = await res.json();
-    console.log('Response data:', data);
 
     return data;
   } catch (err) {
