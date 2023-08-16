@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import GlobalContext from '../components/GlobalContext';
 import CartProduct from '../components/CartProduct';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { fetchCart } from '../lib/api';
 import CartContext from '../components/CartContext';
 
 const Cart = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, token } = useContext(GlobalContext);
   const navigate = useNavigate();
   const { cart, setCart } = useContext(CartContext);
 
@@ -22,6 +22,30 @@ const Cart = () => {
     }
     user && loadCart(user.userId);
   }, [user, navigate, setCart]);
+
+  const handleCheckout = useCallback(async () => {
+    try {
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ cart }),
+      };
+      const res = await fetch('/api/checkout', req);
+
+      if (!res.ok) {
+        throw new Error(`fetch Error ${res.status}`);
+      }
+
+      setCart([]);
+      const body = await res.json();
+      window.location.href = body.url;
+    } catch (err) {
+      console.error(err);
+    }
+  }, [cart, setCart, token]);
 
   return (
     <div className="h-100 gradient-custom w-full">
@@ -57,9 +81,22 @@ const Cart = () => {
                   </span>
                 </li>
               </ul>
-              <button className="bg-[#2BA3C6] hover:bg-[#1b81a0] text-white font-bold py-2 px-4 rounded w-full">
+              <button
+                className="bg-[#2BA3C6] hover:bg-[#1b81a0] text-white font-bold py-2 px-4 rounded w-full"
+                onClick={handleCheckout}>
                 Checkout
               </button>
+              <div className="bg-gray-100 rounded-md p-4 mb-4 mt-8">
+                <h4 className="text-sm font-semibold mb-2">
+                  Test Credit Card Information:
+                </h4>
+                <p>Email: test@email.com</p>
+                <p>Card Number: 4242 4242 4242 4242</p>
+                <p>Exp: 4/24</p>
+                <p>CVC: 424</p>
+                <p>Name: test</p>
+                <p>Zip Code: 42424</p>
+              </div>
             </div>
           </div>
         </div>

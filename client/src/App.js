@@ -21,6 +21,7 @@ import PrintMaking from './pages/PrintMaking';
 import Fabric from './pages/Fabric';
 import PageNotFound from './pages/PageNotFound';
 import Footer from './components/Footer';
+import Success from './pages/Success';
 
 function App() {
   const { user, token, isAuthorizing, handleSignin, handleSignout } = useAuth();
@@ -79,6 +80,7 @@ function App() {
               <Route path="framing" element={<Framing />} />
               <Route path="printmaking" element={<PrintMaking />} />
               <Route path="fabric" element={<Fabric />} />
+              <Route path="success" element={<Success />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </main>

@@ -5,6 +5,7 @@ import ClientError from './lib/client-error.js';
 import pg from 'pg';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
+import Stripe from 'stripe';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -14,6 +15,7 @@ const db = new pg.Pool({
   },
 });
 
+const stripe = new Stripe(process.env.STRIPE_KEY);
 const app = express();
 
 // Create paths for static directories
@@ -196,6 +198,38 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
     const payload = { userId, username, cartId };
     const token = jwt.sign(payload, process.env.TOKEN_SECRET);
     res.json({ token, user: payload });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/checkout', async (req, res, next) => {
+  try {
+    const { cart } = req.body;
+    const lineItems = cart.map((product) => ({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: product.name,
+          images: [product.image],
+          description: product.description,
+          metadata: {
+            id: product.id,
+          },
+        },
+        unit_amount: product.price * 100,
+      },
+      quantity: product.qty,
+    }));
+
+    const session = await stripe.checkout.sessions.create({
+      line_items: lineItems,
+      mode: 'payment',
+      success_url: `${'https://art-ecommerce.jaaraujo.com/success'}?success=true`,
+      cancel_url: `${'https://art-ecommerce.jaaraujo.com/cart'}?canceled=true`,
+    });
+
+    res.status(200).json({ url: session.url });
   } catch (err) {
     next(err);
   }
