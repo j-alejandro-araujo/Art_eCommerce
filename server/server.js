@@ -7,7 +7,6 @@ import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import Stripe from 'stripe';
 
-// eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -18,12 +17,10 @@ const db = new pg.Pool({
 const stripe = new Stripe(process.env.STRIPE_KEY);
 const app = express();
 
-// Create paths for static directories
 const reactStaticDir = new URL('../client/build', import.meta.url).pathname;
 const uploadsStaticDir = new URL('public', import.meta.url).pathname;
 
 app.use(express.static(reactStaticDir));
-// Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
@@ -235,17 +232,6 @@ app.post('/api/checkout', async (req, res, next) => {
   }
 });
 
-/**
- * Serves React's index.html if no api route matches.
- *
- * Implementation note:
- * When the final project is deployed, this Express server becomes responsible
- * for serving the React files. (In development, the Create React App server does this.)
- * When navigating in the client, if the user refreshes the page, the browser will send
- * the URL to this Express server instead of to React Router.
- * Catching everything that doesn't match a route and serving index.html allows
- * React Router to manage the routing.
- */
 app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
 
 app.use(errorMiddleware);
